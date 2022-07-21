@@ -17,6 +17,7 @@ end
 
 puts "creating users..."
 User.create(user_info) until User.count == 10
+User.create(name: "naftali kulik", username: "nkulik", password: "nkulik", avatar_url: Faker::Avatar.image)
 
 puts "getting games..."
 
