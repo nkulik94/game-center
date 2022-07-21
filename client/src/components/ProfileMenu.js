@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import IconButton from '@mui/material/IconButton';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
@@ -24,9 +23,7 @@ function ProfileMenu({ setLoggedIn }) {
                 color="inherit"
                 onClick={e => setAnchor(e.currentTarget)}
                 >
-                    <Avatar sx={{ bgcolor: lightBlue[700] }} >
-                        <AccountCircle />
-                    </Avatar>
+                    <Avatar sx={{ bgcolor: lightBlue[700] }} />
             </IconButton>
             <Menu
                 id="menu-appbar"

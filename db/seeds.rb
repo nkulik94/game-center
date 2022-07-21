@@ -10,7 +10,8 @@ def user_info
     name: Faker::Name.name,
     username: username,
     password: Faker::Alphanumeric.alphanumeric(number: 8, min_numeric: 3),
-    bio: Faker::Lorem.sentences.join(' ')
+    bio: Faker::Lorem.sentences.join(' '),
+    avatar_url: Faker::Avatar.image
     }
 end
 
