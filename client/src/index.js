@@ -10,7 +10,15 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import reportWebVitals from './reportWebVitals';
 
-const theme = createTheme()
+const theme = createTheme({
+  palette: {
+    mode: 'dark',
+    background: {
+      paper: '#424242',
+      default: '#424242'
+    }
+  },
+})
 
 ReactDOM.render(
     <ThemeProvider theme={theme} >

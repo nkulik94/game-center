@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import SignIn from "./SignIn";
 import Logout from "./Logout";
 import SignUp from "./SignUp";
+import NavAppBar from "./NavAppBar";
 
 function App() {
     const [isLoggedIn, setLoggedIn] = useState(false)
@@ -17,6 +18,8 @@ function App() {
     }, [])
 
     return (
+        <>
+        <NavAppBar />
         <Switch>
             <Route path="/sign-in">
                 {isLoggedIn ? <Logout setLoggedIn={setLoggedIn} /> : <SignIn setLoggedIn={setLoggedIn} />}
@@ -25,6 +28,7 @@ function App() {
                 <SignUp setLoggedIn={setLoggedIn} />
             </Route>
         </Switch>
+        </>
     )
 }
 
