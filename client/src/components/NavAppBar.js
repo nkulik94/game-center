@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import NavMenu from './NavMenu';
 import ProfileMenu from './ProfileMenu';
 
-function NavAppBar({ loggedIn }) {
+function NavAppBar({ loggedIn, setLoggedIn }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -17,7 +17,7 @@ function NavAppBar({ loggedIn }) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Gamer Spot
           </Typography>
-          {loggedIn ? <ProfileMenu /> : <Button component={Link} to="/sign-in" color="inherit">Login</Button>}
+          {loggedIn ? <ProfileMenu setLoggedIn={setLoggedIn} /> : <Button component={Link} to="/sign-in" color="inherit">Login</Button>}
         </Toolbar>
       </AppBar>
     </Box>
