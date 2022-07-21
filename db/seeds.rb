@@ -14,4 +14,23 @@ end
 puts "creating users..."
 User.create(user_info) until User.count == 10
 
+puts "getting games..."
+
+response = RestClient.get "https://www.freetogame.com/api/games"
+
+games = JSON.parse(response)
+
+games.each do |game_hash|
+    Game.create(
+        title: game_hash['title'],
+        thumbnail: game_hash['thumbnail'],
+        short_description: game_hash['short_description'],
+        game_url: game_hash['game_url'],
+        platform: game_hash['platform'],
+        publisher: game_hash['publisher'],
+        developer: game_hash['developer'],
+        release_date: game_hash['release_date']
+    )
+end
+
 puts "done seeding!"
