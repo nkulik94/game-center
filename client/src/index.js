@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './index.css';
 import App from './components/App';
 import '@fontsource/roboto/300.css';
@@ -9,10 +10,14 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import reportWebVitals from './reportWebVitals';
 
+const theme = createTheme()
+
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+    <ThemeProvider theme={theme} >
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ThemeProvider>,
   document.getElementById('root')
 );
 

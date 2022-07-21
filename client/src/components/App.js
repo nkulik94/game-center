@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom';
 import SignIn from "./SignIn";
 import Logout from "./Logout";
 import SignUp from "./SignUp";
@@ -16,7 +16,6 @@ function App() {
         })
     }, [])
 
-    //return isLoggedIn ? <Logout setLoggedIn={setLoggedIn} /> : <SignIn setLoggedIn={setLoggedIn} />
     return (
         <Switch>
             <Route path="/sign-in">

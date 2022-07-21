@@ -9,9 +9,8 @@ import Box from '@mui/material/Box';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const theme = createTheme();
+
 
 function SignIn({ setLoggedIn }) {
   const [formData, setFormData] = useState({
@@ -41,7 +40,6 @@ function SignIn({ setLoggedIn }) {
   }
 
   return (
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -100,7 +98,6 @@ function SignIn({ setLoggedIn }) {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }
 
