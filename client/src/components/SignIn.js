@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
-function SignIn() {
+function SignIn({ setLoggedIn }) {
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -32,8 +32,12 @@ function SignIn() {
       body: JSON.stringify(formData)
     }
     fetch('/login', config)
-    .then(res => res.json())
-    .then(console.log)
+    .then(res => {
+      if (res.ok) {
+        setLoggedIn(true)
+      }
+      res.json().then(console.log)
+    })
   }
 
   return (

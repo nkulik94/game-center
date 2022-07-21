@@ -1,3 +1,6 @@
+User.destroy_all
+Game.destroy_all
+
 puts "seeding database..."
 
 def user_info
