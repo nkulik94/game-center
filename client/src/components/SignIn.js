@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,6 +14,27 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme();
 
 function SignIn() {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  })
+
+  function handleForm(e) {
+    e.preventDefault()
+    setFormData({...formData, [e.target.name]: e.target.value})
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    const config ={
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(formData)
+    }
+    fetch('/login', config)
+    .then(res => res.json())
+    .then(console.log)
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -33,7 +54,7 @@ function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }}>
+          <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
             <TextField
               margin="normal"
               required
@@ -42,6 +63,8 @@ function SignIn() {
               label="Username"
               name="username"
               autoFocus
+              value={formData.username}
+              onChange={handleForm}
             />
             <TextField
               margin="normal"
@@ -52,6 +75,8 @@ function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={formData.password}
+              onChange={handleForm}
             />
             <Button
               type="submit"
