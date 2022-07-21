@@ -13,6 +13,7 @@ end
 
 puts "creating users..."
 User.create(user_info) until User.count == 10
+User.create(name: "nkulik", username: "nkulik", password: "nkulik")
 
 puts "getting games..."
 
