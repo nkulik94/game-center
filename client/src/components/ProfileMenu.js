@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom'
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
@@ -40,13 +41,12 @@ function ProfileMenu({ setLoggedIn, avatar }) {
                 open={Boolean(anchor)}
                 onClose={() => setAnchor(null)}
               >
-                <MenuItem onClick={() => setAnchor(null)}>Profile</MenuItem>
+                <MenuItem component={Link} to="/profile" onClick={() => setAnchor(null)}>Profile</MenuItem>
                 <MenuItem
                     onClick={() => {
                         setAnchor(null)
                         handleLogOut()
                         }}
-                    color="error"
                     >
                         Sign Out
                     </MenuItem>

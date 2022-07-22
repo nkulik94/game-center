@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch } from 'react-router-dom';
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import ProfilePage from "./ProfilePage";
 import NavAppBar from "./NavAppBar";
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -24,6 +25,9 @@ function App() {
         <Switch>
             <Route exact path="/">
                 <div></div>
+            </Route>
+            <Route path="/profile">
+                <ProfilePage />
             </Route>
             <Route path="/sign-in">
                 <SignIn setLoggedIn={setUser} />
