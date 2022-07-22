@@ -7,7 +7,8 @@ def user_info
     username = Faker::Beer.name
     username = username.split(' ').join('')
     info = {
-    name: Faker::Name.name,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
     username: username,
     password: Faker::Alphanumeric.alphanumeric(number: 8, min_numeric: 3),
     bio: Faker::Lorem.sentences.join(' '),
@@ -17,7 +18,7 @@ end
 
 puts "creating users..."
 User.create(user_info) until User.count == 10
-User.create(name: "naftali kulik", username: "nkulik", password: "nkulik", avatar_url: "https://drive.google.com/uc?export=view&id=12O1_1NbBDxe0KDwPkMHP897AlJVal0o4")
+User.create(first_name: "naftali", last_name: 'kulik', username: "nkulik", password: "nkulik", avatar_url: "https://drive.google.com/uc?export=view&id=12O1_1NbBDxe0KDwPkMHP897AlJVal0o4")
 
 puts "getting games.."
 

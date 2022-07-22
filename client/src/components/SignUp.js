@@ -13,8 +13,8 @@ import Container from '@mui/material/Container';
 
 function SignUp({ setLoggedIn }) {
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         username: '',
         password: '',
         password_confirmation: ''
@@ -26,13 +26,12 @@ function SignUp({ setLoggedIn }) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        const fullName = `${formData.firstName} ${formData.lastName}`
         const config = {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({...formData, name: fullName})
+            body: JSON.stringify(formData)
         }
         fetch('/signup', config)
         .then(res => {
@@ -63,13 +62,13 @@ function SignUp({ setLoggedIn }) {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="first_name"
                   required
                   fullWidth
                   id="firstName"
                   label="First Name"
                   autoFocus
-                  value={formData.firstName}
+                  value={formData.first_name}
                   onChange={handleForm}
                 />
               </Grid>
@@ -79,9 +78,9 @@ function SignUp({ setLoggedIn }) {
                   fullWidth
                   id="lastName"
                   label="Last Name"
-                  name="lastName"
+                  name="last_name"
                   autoComplete="family-name"
-                  value={formData.lastName}
+                  value={formData.last_name}
                   onChange={handleForm}
                 />
               </Grid>
