@@ -6,11 +6,30 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 
-function BioEdit({ bio }) {
+function BioEdit({ bio, setBio, id }) {
     const [open, setOpen] = useState(false)
-    const [bioForm, setBio] = useState(bio)
+    const [bioForm, setBioForm] = useState(bio)
 
     const handleForm = () => setOpen(!open)
+
+    function handleEdit() {
+        const config = {
+            method: 'PATCH',
+            headers: {
+                "COntent-Type": "application/json"
+            },
+            body: JSON.stringify({bio: bioForm})
+        }
+        fetch(`/users/${id}`, config)
+        .then(r => {
+            if (r.ok) {
+                r.json().then(data => {
+                    setBio(data.bio)
+                    handleForm()
+                })
+            }
+        })
+    }
 
     return (
         <>
@@ -27,12 +46,20 @@ function BioEdit({ bio }) {
             variant="outlined"
             multiline
             value={bioForm}
-            onChange={e => setBio(e.target.value)}
+            onChange={e => setBioForm(e.target.value)}
           />
             </DialogContent>
             <DialogActions>
-                <Button>Save</Button>
-                <Button color='error'>Cancel</Button>
+                <Button onClick={handleEdit} >Save</Button>
+                <Button
+                color='error'
+                onClick={() => {
+                    handleForm()
+                    setBioForm(bio)
+                }}
+                >
+                    Cancel
+                </Button>
             </DialogActions>
         </Dialog>
         </>

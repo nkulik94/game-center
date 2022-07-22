@@ -49,7 +49,7 @@ function ProfilePage({ profile }) {
                     <br/>
                     {profile.tier}
                 </Typography>
-                {profile.bio ? <Bio bio={profile.bio} /> : <Button variant='text' >Create Bio</Button>}
+                {profile.bio ? <Bio bio={profile.bio} id={profile.id} /> : <Button variant='text' >Create Bio</Button>}
             </Paper>
         </Container>
     )
