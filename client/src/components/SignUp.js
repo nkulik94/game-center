@@ -37,9 +37,8 @@ function SignUp({ setLoggedIn }) {
         fetch('/signup', config)
         .then(res => {
         if (res.ok) {
-            setLoggedIn(true)
+          res.json().then(setLoggedIn)
         }
-        res.json().then(console.log)
         })
     }
 

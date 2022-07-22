@@ -6,13 +6,13 @@ import NavAppBar from "./NavAppBar";
 import CssBaseline from '@mui/material/CssBaseline';
 
 function App() {
-    const [isLoggedIn, setLoggedIn] = useState(false)
+    const [user, setUser] = useState(null)
 
     useEffect(() => {
         fetch("/me")
         .then(res => {
             if (res.ok) {
-                res.json().then(() => setLoggedIn(true))
+                res.json().then(user => setUser(user))
             }
         })
     }, [])
@@ -20,16 +20,16 @@ function App() {
     return (
         <>
         <CssBaseline />
-        <NavAppBar loggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
+        <NavAppBar user={user} setLoggedIn={setUser} />
         <Switch>
             <Route exact path="/">
                 <div></div>
             </Route>
             <Route path="/sign-in">
-                <SignIn setLoggedIn={setLoggedIn} />
+                <SignIn setLoggedIn={setUser} />
             </Route>
             <Route path="/create-account">
-                <SignUp setLoggedIn={setLoggedIn} />
+                <SignUp setLoggedIn={setUser} />
             </Route>
         </Switch>
         </>

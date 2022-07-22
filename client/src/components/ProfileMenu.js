@@ -5,12 +5,12 @@ import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import { lightBlue } from '@mui/material/colors';
 
-function ProfileMenu({ setLoggedIn }) {
+function ProfileMenu({ setLoggedIn, avatar }) {
     const [anchor, setAnchor] = useState(null)
 
     function handleLogOut() {
         fetch('/logout', {method: 'DELETE'})
-        .then(() => setLoggedIn(false))
+        .then(() => setLoggedIn(null))
     }
 
     return (
@@ -23,7 +23,7 @@ function ProfileMenu({ setLoggedIn }) {
                 color="inherit"
                 onClick={e => setAnchor(e.currentTarget)}
                 >
-                    <Avatar sx={{ bgcolor: lightBlue[700] }} />
+                    <Avatar sx={{ bgcolor: lightBlue[700] }} src={avatar} />
             </IconButton>
             <Menu
                 id="menu-appbar"
