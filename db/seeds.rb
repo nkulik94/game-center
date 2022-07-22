@@ -19,7 +19,7 @@ puts "creating users..."
 User.create(user_info) until User.count == 10
 User.create(name: "naftali kulik", username: "nkulik", password: "nkulik", avatar_url: Faker::Avatar.image)
 
-puts "getting games..."
+puts "getting games.."
 
 response = RestClient.get "https://www.freetogame.com/api/games"
 
