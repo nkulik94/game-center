@@ -27,7 +27,7 @@ function App() {
                 <div></div>
             </Route>
             <Route path="/profile">
-                <ProfilePage />
+                <ProfilePage profile={user} />
             </Route>
             <Route path="/sign-in">
                 <SignIn setLoggedIn={setUser} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
 import './index.css';
 import App from './components/App';
 import '@fontsource/roboto/300.css';
@@ -10,7 +10,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import reportWebVitals from './reportWebVitals';
 
-const theme = createTheme({
+let theme = createTheme({
   palette: {
     mode: 'dark',
     background: {
@@ -19,6 +19,7 @@ const theme = createTheme({
     }
   },
 })
+theme = responsiveFontSizes(theme);
 
 ReactDOM.render(
     <ThemeProvider theme={theme} >
