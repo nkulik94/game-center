@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Badge from '@mui/material/Badge';
 import HelpButton from './HelpButton';
+import Bio from './Bio';
 
 function ProfilePage({ profile }) {
 
@@ -48,6 +49,7 @@ function ProfilePage({ profile }) {
                     <br/>
                     {profile.tier}
                 </Typography>
+                {profile.bio ? <Bio bio={profile.bio} /> : <Button variant='text' >Create Bio</Button>}
             </Paper>
         </Container>
     )
