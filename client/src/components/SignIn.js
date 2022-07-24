@@ -9,10 +9,12 @@ import Box from '@mui/material/Box';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import ErrorMsg from './ErrorMsg';
 
 
 
 function SignIn({ setLoggedIn }) {
+  const [error, setError] = useState(false)
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -21,6 +23,11 @@ function SignIn({ setLoggedIn }) {
   function handleForm(e) {
     e.preventDefault()
     setFormData({...formData, [e.target.name]: e.target.value})
+  }
+
+  function handleError(error) {
+    setError(error)
+    setTimeout(() => setError(false), 3000)
   }
 
   function handleSubmit(e) {
@@ -34,6 +41,8 @@ function SignIn({ setLoggedIn }) {
     .then(res => {
       if (res.ok) {
         res.json().then(setLoggedIn)
+      } else {
+        res.json().then(handleError)
       }
     })
   }
@@ -78,6 +87,7 @@ function SignIn({ setLoggedIn }) {
               value={formData.password}
               onChange={handleForm}
             />
+            {error ? <ErrorMsg error={error.error} /> : null}
             <Button
               type="submit"
               fullWidth
