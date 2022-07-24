@@ -6,6 +6,7 @@ import ProfilePage from "./ProfilePage";
 import NavAppBar from "./NavAppBar";
 import GameList from "./GameList";
 import CssBaseline from '@mui/material/CssBaseline';
+import DetailedGame from "./DetailedGame";
 
 function App() {
     const [user, setUser] = useState(null)
@@ -27,8 +28,11 @@ function App() {
             <Route exact path="/">
                 <div></div>
             </Route>
-            <Route path="/game-list">
+            <Route exact path="/game-list">
                 <GameList />
+            </Route>
+            <Route path={`/game-list/:gameId`}>
+                <DetailedGame />
             </Route>
             <Route path="/profile">
                 <ProfilePage profile={user} />

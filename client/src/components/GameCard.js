@@ -20,7 +20,7 @@ function GameCard({ game }) {
                     {game.short_description}
                 </Typography>
             </CardContent>
-            <GameCardActions />
+            <GameCardActions game={game} />
         </Card>
     )
 }
