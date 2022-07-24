@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
 import './index.css';
+import { UserProvider } from './context/user';
 import App from './components/App';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -24,7 +25,9 @@ theme = responsiveFontSizes(theme);
 ReactDOM.render(
     <ThemeProvider theme={theme} >
       <BrowserRouter>
-        <App />
+        <UserProvider>
+          <App />
+        </UserProvider>
       </BrowserRouter>
     </ThemeProvider>,
   document.getElementById('root')

@@ -9,7 +9,7 @@ function DetailedGame() {
         fetch(`/games/${id}`)
             .then(r => r.json())
             .then(setGame)
-    }, [])
+    }, [id])
     
     if (!game) return null
 

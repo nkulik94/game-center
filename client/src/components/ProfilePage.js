@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
@@ -8,10 +8,13 @@ import Box from '@mui/material/Box';
 import Badge from '@mui/material/Badge';
 import HelpButton from './HelpButton';
 import Bio from './Bio';
+import BioEdit from './BioEdit';
 
 function ProfilePage({ profile }) {
 
-    if (!profile) return <h1>hi</h1>
+    if (!profile) return null
+
+    //if (!bioState && profile.bio) setBio(profile.bio)
 
     const message = "User's tier is determined by how many games the user has reviewed"
 
@@ -49,10 +52,11 @@ function ProfilePage({ profile }) {
                     <br/>
                     {profile.tier}
                 </Typography>
-                {profile.bio ? <Bio bio={profile.bio} id={profile.id} /> : <Button variant='text' >Create Bio</Button>}
+                {profile.bio ? <Bio bio={profile.bio} id={profile.id} /> : <BioEdit bio={''} id={profile.id} action={'Create Bio'} />}
             </Paper>
         </Container>
     )
 }
 
+// <BioEdit bio={''} setBio={setBio} id={profile.id} action={"Create Bio"}
 export default ProfilePage

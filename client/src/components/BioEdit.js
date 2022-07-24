@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import { UserContext } from "../context/user";
 
-function BioEdit({ bio, setBio, id }) {
+
+function BioEdit({ bio, id, action }) {
     const [open, setOpen] = useState(false)
     const [bioForm, setBioForm] = useState(bio)
+    const setUser = useContext(UserContext).setUser
 
     const handleForm = () => setOpen(!open)
 
@@ -24,8 +27,8 @@ function BioEdit({ bio, setBio, id }) {
         .then(r => {
             if (r.ok) {
                 r.json().then(data => {
-                    setBio(data.bio)
                     handleForm()
+                    setUser(data)
                 })
             }
         })
@@ -33,9 +36,9 @@ function BioEdit({ bio, setBio, id }) {
 
     return (
         <>
-        <Button variant='text' onClick={handleForm} >Edit</Button>
+        <Button variant='text' onClick={handleForm} >{action}</Button>
         <Dialog open={open} onClose={handleForm} >
-            <DialogTitle>Edit</DialogTitle>
+            <DialogTitle>{action}</DialogTitle>
             <DialogContent >
             <TextField
             autoFocus
