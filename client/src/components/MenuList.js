@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -16,9 +17,10 @@ function MenuList({ onClickList }) {
         >
             <List>
                 {options.map(option => {
+                    const link = option === 'Games' ? 'game-list' : option.toLowerCase()
                     return (
                         <ListItem key={option} disablePadding>
-                            <ListItemButton>
+                            <ListItemButton component={Link} to={`/${link}`} >
                                 <ListItemText primary={option} />
                             </ListItemButton>
                         </ListItem>

@@ -27,7 +27,7 @@ function App() {
             <Route exact path="/">
                 <div></div>
             </Route>
-            <Route path="/games">
+            <Route path="/game-list">
                 <GameList />
             </Route>
             <Route path="/profile">
