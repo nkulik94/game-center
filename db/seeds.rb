@@ -38,7 +38,8 @@ games.each do |game_hash|
         publisher: game_hash['publisher'],
         developer: game_hash['developer'],
         release_date: game_hash['release_date'],
-        ftg_id: game_hash['id']
+        ftg_id: game_hash['id'],
+        genre: game_hash['genre']
     )
 end
 
