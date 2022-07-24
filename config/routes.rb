@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :games
+  resources :games, only: [:index, :show]
   post "/signup", to: "users#create"
 
   get "/me", to: "users#show"
