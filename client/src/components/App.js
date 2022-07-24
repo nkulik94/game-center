@@ -4,6 +4,7 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import ProfilePage from "./ProfilePage";
 import NavAppBar from "./NavAppBar";
+import GameList from "./GameList";
 import CssBaseline from '@mui/material/CssBaseline';
 
 function App() {
@@ -25,6 +26,9 @@ function App() {
         <Switch>
             <Route exact path="/">
                 <div></div>
+            </Route>
+            <Route path="/games">
+                <GameList />
             </Route>
             <Route path="/profile">
                 <ProfilePage profile={user} />
