@@ -7,12 +7,7 @@ class GamesController < ApplicationController
 
     def show
         game = Game.find(params[:id])
-        if game.description
-            render json: game, serializer: DetailedGameSerializer
-        else
-            game.get_description
-            render json: game, serializer: DetailedGameSerializer
-        end
+        render json: game, serializer: DetailedGameSerializer
     end
 
     private

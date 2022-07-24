@@ -43,4 +43,13 @@ games.each do |game_hash|
     )
 end
 
+puts "getting descriptions..."
+
+Game.all.each do |game|
+    puts game.title
+    game.get_description
+    # This is to avoid going over freetogame rate limit
+    sleep(0.30)
+end
+
 puts "done seeding!"
