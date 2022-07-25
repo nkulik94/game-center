@@ -17,7 +17,7 @@ function MenuList({ onClickList }) {
         >
             <List>
                 {options.map(option => {
-                    const link = option === 'Games' ? 'game-list' : option.toLowerCase()
+                    const link = option === 'Games' ? 'game-list/pages/1' : option.toLowerCase()
                     return (
                         <ListItem key={option} disablePadding>
                             <ListItemButton component={Link} to={`/${link}`} >

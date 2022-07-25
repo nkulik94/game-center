@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -8,25 +9,33 @@ import PageButtons from "./PageButtons";
 function GameList() {
     const [games, setGames] = useState([])
     const [pageCount, setPageCount] = useState(0)
-    const [page, setPage] = useState({
-        start: 0,
-        end: 18
-    })
+    const [currentPage, setPage] = useState(1)
+
+    const pageNum = useParams().page
+
+    const start = (pageNum - 1) * 18
+    const end = start + 18
 
     useEffect(() => {
-        fetch('/games')
-        .then(r => r.json())
-        .then(games => {
-            setPageCount(Math.ceil(games.length / 18))
-            setGames(games)
-        })
-    }, [])
+        function getGames() {
+            fetch('/games')
+            .then(r => r.json())
+            .then(games => {
+                setPageCount(Math.ceil(games.length / 18))
+                setGames(games)
+            })
+        }
+        if (games.length === 0) {
+            getGames()
+        }
+        setPage(parseInt(pageNum, 10))
+    }, [pageNum, games])
 
     return (
         <Container sx={{marginTop: '3%'}}>
             <Paper sx={{textAlign: 'center', color: '#e0e0e0'}}>
                 <Grid container spacing={2} >
-                    {games.slice(page.start, page.end).map(game => {
+                    {games.slice(start, end).map(game => {
                         return (
                             <Grid item key={game.id} >
                                 <GameCard game={game} />
@@ -34,7 +43,7 @@ function GameList() {
                         )
                     })}
                 </Grid>
-                <PageButtons pageCount={pageCount} setPage={setPage} />
+                <PageButtons pageCount={pageCount} currentPage={currentPage} />
             </Paper>
         </Container>
     )

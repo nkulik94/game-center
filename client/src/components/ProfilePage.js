@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { UserContext } from '../context/user';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Badge from '@mui/material/Badge';
 import HelpButton from './HelpButton';
@@ -16,6 +16,10 @@ function ProfilePage() {
 
     const profile = useContext(UserContext).user
     const setUser = useContext(UserContext).setUser
+
+    const history = useHistory()
+
+    if (!profile) history.goBack()
 
     if (!profile) return null
 
