@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { UserContext } from '../context/user';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -17,8 +17,6 @@ function ProfilePage() {
 
     if (!profile) return null
 
-    //if (!bioState && profile.bio) setBio(profile.bio)
-
     const message = "User's tier is determined by how many games the user has reviewed"
 
     const helpButton = <HelpButton message={message} />
@@ -35,11 +33,7 @@ function ProfilePage() {
                 <br/>
                 <Box>
                     <Avatar
-                    sx={{
-                        width: '10%',
-                        height: '10%',
-                        margin: 'auto'
-                        }}
+                    sx={{width: '10%', height: '10%', margin: 'auto'}}
                     src={profile.avatar_url}
                     />
                     <Typography variant='caption'>
