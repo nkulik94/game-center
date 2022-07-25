@@ -7,6 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
 
 function DetailedGame() {
     const id = useParams().gameId
@@ -36,7 +37,7 @@ function DetailedGame() {
                             <br/>
                             <Typography variant="subtitle"><strong>Genre:</strong> {game.genre}</Typography>
                             <br/>
-                            <Typography><strong>Game Link:</strong> <a href={game.game_url} >{game.game_url}</a></Typography>
+                            <Typography><strong>Game Link:</strong> <Link href={game.game_url} >{game.game_url}</Link></Typography>
                         </Box>
                         <Typography variant="body" ><strong>Description:</strong> {game.description}</Typography>
                         <Box sx={{lineHeight: '2rem'}} >

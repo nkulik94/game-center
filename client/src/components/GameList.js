@@ -29,7 +29,7 @@ function GameList() {
             getGames()
         }
         setPage(parseInt(pageNum, 10))
-    }, [pageNum, games])
+    }, [pageNum, games.length])
 
     return (
         <Container sx={{marginTop: '3%'}}>
