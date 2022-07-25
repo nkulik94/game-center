@@ -10,12 +10,30 @@ import Badge from '@mui/material/Badge';
 import HelpButton from './HelpButton';
 import Bio from './Bio';
 import BioEdit from './BioEdit';
+import AvatarEdit from './AvatarEdit';
 
 function ProfilePage() {
 
     const profile = useContext(UserContext).user
+    const setUser = useContext(UserContext).setUser
 
     if (!profile) return null
+
+    function handleEdit(body) {
+        const config = {
+            method: 'PATCH',
+            headers: {
+                "COntent-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        }
+        fetch(`/users/${profile.id}`, config)
+        .then(r => {
+            if (r.ok) {
+                r.json().then(setUser)
+            }
+        })
+    }
 
     const message = "User's tier is determined by how many games the user has reviewed"
 
@@ -40,7 +58,7 @@ function ProfilePage() {
                         My Avatar
                     </Typography>
                     <br/>
-                    <Button variant='text' >Change</Button>
+                    <AvatarEdit handleEdit={handleEdit} avatar={profile.avatar_url} />
                 </Box>
                 <Typography variant='subtitle1'>
                     <Badge badgeContent={helpButton}>
@@ -49,11 +67,10 @@ function ProfilePage() {
                     <br/>
                     {profile.tier}
                 </Typography>
-                {profile.bio ? <Bio bio={profile.bio} id={profile.id} /> : <BioEdit bio={''} id={profile.id} action={'Create Bio'} />}
+                {profile.bio ? <Bio bio={profile.bio} id={profile.id} handleEdit={handleEdit} /> : <BioEdit action={'Create Bio'} handleEdit={handleEdit} />}
             </Paper>
         </Container>
     )
 }
 
-// <BioEdit bio={''} setBio={setBio} id={profile.id} action={"Create Bio"}
 export default ProfilePage

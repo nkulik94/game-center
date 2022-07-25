@@ -3,8 +3,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import BioEdit from "./BioEdit";
 
-function Bio({ bio, id }) {
-    // const [bioState, setBio] = useState(bio)
+function Bio({ bio, handleEdit }) {
     return (
         <Box>
             <Typography variant="h6">Bio:</Typography>
@@ -12,7 +11,7 @@ function Bio({ bio, id }) {
                 {bio}
             </Typography>
             <br/>
-            <BioEdit bio={bio} id={id} action={'Edit'}/>
+            <BioEdit bio={bio} action={'Edit'} handleEdit={handleEdit} />
         </Box>
     )
 }
