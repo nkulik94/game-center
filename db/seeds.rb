@@ -17,7 +17,7 @@ def user_info
 end
 
 puts "creating users..."
-User.create(user_info) until User.count == 10
+User.create(user_info) until User.count == 50
 User.create(first_name: "naftali", last_name: 'kulik', username: "nkulik", password: "nkulik", avatar_url: "https://drive.google.com/uc?export=view&id=12O1_1NbBDxe0KDwPkMHP897AlJVal0o4", bio: Faker::Lorem.sentences.join(' '))
 
 puts "getting games..."
@@ -47,9 +47,24 @@ puts "getting descriptions..."
 
 Game.all.each do |game|
     puts game.title
-    game.get_description
     # This is to avoid going over freetogame rate limit
     sleep(0.30)
+    game.get_description
+end
+
+puts "creating ratings"
+
+User.all.each do |user|
+    100.times do
+        game_id = rand(1..Game.count)
+        game = Game.find_by(id: game_id)
+        # doing this conditional for edge cases
+        if game
+            user_game = UserGame.find_or_create_by(user_id: user.id, game_id: game.id)
+            user_game.generate_data
+            puts user_game.liked
+        end
+    end
 end
 
 puts "done seeding!"
