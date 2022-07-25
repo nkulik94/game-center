@@ -8,28 +8,17 @@ import NavAppBar from "./NavAppBar";
 import GameList from "./GameList";
 import CssBaseline from '@mui/material/CssBaseline';
 import DetailedGame from "./DetailedGame";
-//import { UserProvider } from '../context/user';
 
 function App() {
-    //const [user, setUser] = useState(null)
-    const user = useContext(UserContext).user
-    const setUser = useContext(UserContext).setUser
+    const getMe = useContext(UserContext).getMe
 
 
-    useEffect(() => {
-        fetch("/me")
-        .then(res => {
-            if (res.ok) {
-                res.json().then(user => setUser(user))
-            }
-        })
-    }, [])
+    useEffect(() => getMe(), [])
 
     return (
-        //<UserProvider>
         <>
             <CssBaseline />
-            <NavAppBar user={user} setLoggedIn={setUser} />
+            <NavAppBar />
             <Switch>
                 <Route exact path="/">
                     <div></div>
@@ -41,17 +30,16 @@ function App() {
                     <DetailedGame />
                 </Route>
                 <Route path="/profile">
-                    <ProfilePage profile={user} />
+                    <ProfilePage />
                 </Route>
                 <Route path="/sign-in">
-                    <SignIn setLoggedIn={setUser} />
+                    <SignIn />
                 </Route>
                 <Route path="/create-account">
-                    <SignUp setLoggedIn={setUser} />
+                    <SignUp />
                 </Route>
             </Switch>
             </>
-        //</UserProvider>
     )
 }
 

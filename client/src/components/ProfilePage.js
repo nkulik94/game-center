@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../context/user';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
@@ -10,7 +11,9 @@ import HelpButton from './HelpButton';
 import Bio from './Bio';
 import BioEdit from './BioEdit';
 
-function ProfilePage({ profile }) {
+function ProfilePage() {
+
+    const profile = useContext(UserContext).user
 
     if (!profile) return null
 

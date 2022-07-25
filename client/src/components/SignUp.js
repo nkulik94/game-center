@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../context/user';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -12,7 +13,12 @@ import Container from '@mui/material/Container';
 import ErrorMsg from './ErrorMsg';
 
 
-function SignUp({ setLoggedIn }) {
+function SignUp() {
+  const history = useHistory()
+
+  const setUser = useContext(UserContext).setUser
+  const user = useContext(UserContext).user
+
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -21,6 +27,8 @@ function SignUp({ setLoggedIn }) {
         password_confirmation: ''
     })
     const [errors, setErrors] = useState(false)
+
+    if (user) history.goBack()
 
     function handleErrors(errors) {
       setErrors(errors)
@@ -43,7 +51,7 @@ function SignUp({ setLoggedIn }) {
         fetch('/signup', config)
         .then(res => {
         if (res.ok) {
-          res.json().then(setLoggedIn)
+          res.json().then(setUser)
         } else {
           res.json().then(({ errors }) => handleErrors(errors))
         }

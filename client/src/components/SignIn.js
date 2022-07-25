@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../context/user';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -13,12 +14,18 @@ import ErrorMsg from './ErrorMsg';
 
 
 
-function SignIn({ setLoggedIn }) {
+function SignIn() {
+  const history = useHistory()
+
+  const setUser = useContext(UserContext).setUser
+  const user = useContext(UserContext).user
   const [error, setError] = useState(false)
   const [formData, setFormData] = useState({
     username: '',
     password: ''
   })
+
+  if (user) history.goBack()
 
   function handleForm(e) {
     e.preventDefault()
@@ -40,7 +47,7 @@ function SignIn({ setLoggedIn }) {
     fetch('/login', config)
     .then(res => {
       if (res.ok) {
-        res.json().then(setLoggedIn)
+        res.json().then(setUser)
       } else {
         res.json().then(handleError)
       }

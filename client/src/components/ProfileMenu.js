@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../context/user";
 import { Link } from 'react-router-dom'
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
@@ -6,12 +7,13 @@ import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import { lightBlue } from '@mui/material/colors';
 
-function ProfileMenu({ setLoggedIn, avatar }) {
+function ProfileMenu({ avatar }) {
+    const setUser = useContext(UserContext).setUser
     const [anchor, setAnchor] = useState(null)
 
     function handleLogOut() {
         fetch('/logout', {method: 'DELETE'})
-        .then(() => setLoggedIn(null))
+        .then(() => setUser(null))
     }
 
     return (
