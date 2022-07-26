@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { UserContext } from "../context/user";
 import { Link } from 'react-router-dom';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
@@ -11,6 +12,16 @@ import ErrorMsg from "./ErrorMsg";
 
 function GameCardActions({ game, gameObj }) {
     const [error, setError] = useState('')
+    const [liked, setLiked] = useState(false)
+
+    const likedIds = useContext(UserContext).likedIds
+    const likedGames = useContext(UserContext).likedGames
+    const setLikeList = useContext(UserContext).setLikes
+    const setId = useContext(UserContext).setId
+
+    useEffect(() => {
+        likedIds[game.id] ? setLiked(true) : setLiked(false)
+    }, [])
 
     function handleError(error) {
         setError(error)
@@ -30,6 +41,14 @@ function GameCardActions({ game, gameObj }) {
                 if (r.ok) {
                     r.json().then(game => {
                         gameObj.setList(gameObj.listedGames.map(g => g.id === game.id ? game : g))
+                        if (liked) {
+                            setId({...likedIds, [game.id]: null})
+                            setLikeList(likedGames.filter(g => g.id !== game.id))
+                        } else {
+                            setId({...likedIds, [game.id]: game.id})
+                            setLikeList([...likedGames, game])
+                        }
+                        setLiked(!liked)
                     })
                 } else {
                     r.json().then(({ error }) => handleError(error))
@@ -37,12 +56,14 @@ function GameCardActions({ game, gameObj }) {
             })
     }
 
+    const likeBtn = liked ? <FavoriteIcon sx={{color: 'red'}} onClick={handleLikes} /> : <FavoriteBorderIcon sx={{color: 'red'}} onClick={handleLikes} />
+
     return (
         <>
         {error ? <ErrorMsg error={error} /> : null}
         <CardActions>
             <ButtonGroup variant="string" fullWidth>
-                <Button startIcon={<FavoriteBorderIcon sx={{color: 'red'}} onClick={handleLikes} />} >
+                <Button startIcon={likeBtn} >
                     {game.likes}
                 </Button>
                 <Button startIcon={<StarOutlineIcon sx={{color: 'yellow'}} />} >
