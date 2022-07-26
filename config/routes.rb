@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :reviews
-  resources :likes, except: [:index, :show]
-  resources :games, only: [:index, :show]
+  resources :likes, only: [:create, :destroy]
+  resources :games, only: [:index, :show, :update]
   post "/signup", to: "users#create"
 
   get "/me", to: "users#show"

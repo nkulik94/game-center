@@ -10,6 +10,7 @@ function GameList() {
     const [games, setGames] = useState([])
     const [pageCount, setPageCount] = useState(0)
     const [currentPage, setPage] = useState(1)
+    const [listedGames, setList] = useState([])
 
     const pageNum = useParams().page
 
@@ -29,18 +30,20 @@ function GameList() {
             getGames()
         }
         setPage(parseInt(pageNum, 10))
+        setList(games.slice(start, end))
     }, [pageNum, games.length])
 
     if (!games) return null
+
 
     return (
         <Container sx={{marginTop: '3%'}}>
             <Paper sx={{textAlign: 'center', color: '#e0e0e0'}}>
                 <Grid container spacing={2} >
-                    {games.slice(start, end).map(game => {
+                    {listedGames.map(game => {
                         return (
                             <Grid item key={game.id} >
-                                <GameCard game={game} />
+                                <GameCard game={game} gameObj={{listedGames, setList}} />
                             </Grid>
                         )
                     })}
