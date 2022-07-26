@@ -55,16 +55,23 @@ end
 puts "creating ratings"
 
 User.all.each do |user|
-    100.times do
-        game_id = rand(1..Game.count)
-        game = Game.find_by(id: game_id)
-        # doing this conditional for edge cases
-        if game
-            user_game = UserGame.find_or_create_by(user_id: user.id, game_id: game.id)
-            user_game.generate_data
-            puts user_game.liked
-        end
+    rand(50..Game.count).times do
+        user.likes.create(game_id: Game.all.sample.id)
+        puts user.likes.count
     end
 end
+
+# User.all.each do |user|
+#     100.times do
+#         game_id = rand(1..Game.count)
+#         game = Game.find_by(id: game_id)
+#         # doing this conditional for edge cases
+#         if game
+#             user_game = UserGame.find_or_create_by(user_id: user.id, game_id: game.id)
+#             user_game.generate_data
+#             puts user_game.liked
+#         end
+#     end
+# end
 
 puts "done seeding!"

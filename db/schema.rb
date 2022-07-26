@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_25_230220) do
+ActiveRecord::Schema.define(version: 2022_07_26_135837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,12 +31,9 @@ ActiveRecord::Schema.define(version: 2022_07_25_230220) do
     t.integer "ftg_id"
   end
 
-  create_table "user_games", force: :cascade do |t|
-    t.integer "user_id"
+  create_table "likes", force: :cascade do |t|
     t.integer "game_id"
-    t.boolean "liked"
-    t.string "review"
-    t.integer "rating"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

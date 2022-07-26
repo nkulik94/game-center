@@ -31,6 +31,8 @@ function GameList() {
         setPage(parseInt(pageNum, 10))
     }, [pageNum, games.length])
 
+    if (!games) return null
+
     return (
         <Container sx={{marginTop: '3%'}}>
             <Paper sx={{textAlign: 'center', color: '#e0e0e0'}}>
