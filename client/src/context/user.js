@@ -7,23 +7,31 @@ function UserProvider({ children }) {
     const [profile, setProfile] = useState(null)
     const [likedIds, setId] = useState({})
 
+    function setUpUser(user) {
+        setLikes(user.liked_games)
+        const newProfile = {}
+        Object.keys(user).forEach(key => {
+            if (!Array.isArray(user[key])) {
+                newProfile[key] = user[key]
+            }
+        })
+        setProfile(newProfile)
+        const ids = {}
+        user.liked_games.map(game => ids[game.id] = game.id)
+        setId(ids)
+    }
+
+    function signOut() {
+        setLikes(null)
+        setProfile(null)
+        setId({})
+    }
+
     function getMe() {
         fetch("/me")
         .then(res => {
             if (res.ok) {
-                res.json().then(user => {
-                    setLikes(user.liked_games)
-                    const newProfile = {}
-                    Object.keys(user).forEach(key => {
-                        if (!Array.isArray(user[key])) {
-                            newProfile[key] = user[key]
-                        }
-                    })
-                    setProfile(newProfile)
-                    const ids = {}
-                    user.liked_games.map(game => ids[game.id] = game.id)
-                    setId(ids)
-                })
+                res.json().then(setUpUser)
             }
         })
     }
@@ -34,7 +42,9 @@ function UserProvider({ children }) {
         likedGames,
         setLikes,
         setId,
-        likedIds
+        likedIds,
+        setUpUser,
+        signOut
     }
 
     return <UserContext.Provider value={currentUser}>{children}</UserContext.Provider>;

@@ -16,7 +16,7 @@ import ErrorMsg from './ErrorMsg';
 function SignUp() {
   const history = useHistory()
 
-  const setUser = useContext(UserContext).setUser
+  const setUpUser = useContext(UserContext).setUpUser
   const user = useContext(UserContext).user
 
     const [formData, setFormData] = useState({
@@ -51,7 +51,7 @@ function SignUp() {
         fetch('/signup', config)
         .then(res => {
         if (res.ok) {
-          res.json().then(setUser)
+          res.json().then(setUpUser)
         } else {
           res.json().then(({ errors }) => handleErrors(errors))
         }

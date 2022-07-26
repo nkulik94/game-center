@@ -21,7 +21,7 @@ function GameCardActions({ game, gameObj, setDetailed = false }) {
 
     useEffect(() => {
         likedIds[game.id] ? setLiked(true) : setLiked(false)
-    }, [game])
+    }, [game, likedIds])
 
     const likeCounter = liked ? -1 : 1
 

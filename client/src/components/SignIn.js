@@ -17,7 +17,7 @@ import ErrorMsg from './ErrorMsg';
 function SignIn() {
   const history = useHistory()
 
-  const setUser = useContext(UserContext).setUser
+  const setUpUser = useContext(UserContext).setUpUser
   const user = useContext(UserContext).user
   const [error, setError] = useState(false)
   const [formData, setFormData] = useState({
@@ -47,7 +47,7 @@ function SignIn() {
     fetch('/login', config)
     .then(res => {
       if (res.ok) {
-        res.json().then(setUser)
+        res.json().then(setUpUser)
       } else {
         res.json().then(handleError)
       }

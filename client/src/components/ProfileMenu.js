@@ -8,12 +8,12 @@ import Avatar from '@mui/material/Avatar';
 import { lightBlue } from '@mui/material/colors';
 
 function ProfileMenu({ avatar }) {
-    const setUser = useContext(UserContext).setUser
+    const signOut = useContext(UserContext).signOut
     const [anchor, setAnchor] = useState(null)
 
     function handleLogOut() {
         fetch('/logout', {method: 'DELETE'})
-        .then(() => setUser(null))
+        .then(() => signOut())
     }
 
     return (
