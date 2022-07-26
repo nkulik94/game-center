@@ -13,13 +13,13 @@ function GameCardActions({ game }) {
         <CardActions>
             <ButtonGroup variant="string" fullWidth>
                 <Button startIcon={<FavoriteBorderIcon sx={{color: 'red'}} />} >
-                    5
+                    {game.likes}
                 </Button>
                 <Button startIcon={<StarOutlineIcon sx={{color: 'yellow'}} />} >
-                    4.7
+                    {game.average_rating}
                 </Button>
                 <Button startIcon={<ChatBubbleOutlineIcon />} >
-                    5
+                    {game.review_count}
                 </Button>
                 <Button sx={{color: '#1e88e5'}} component={Link} to={`/game-list/${game.id}`} >
                     More
