@@ -11,11 +11,13 @@ import HelpButton from './HelpButton';
 import Bio from './Bio';
 import BioEdit from './BioEdit';
 import AvatarEdit from './AvatarEdit';
+import GameList from './GameList';
 
 function ProfilePage() {
 
     const profile = useContext(UserContext).user
     const setUser = useContext(UserContext).setUser
+    const likeList = useContext(UserContext).likedGames
 
     const history = useHistory()
 
@@ -72,6 +74,8 @@ function ProfilePage() {
                     {profile.tier}
                 </Typography>
                 {profile.bio ? <Bio bio={profile.bio} id={profile.id} handleEdit={handleEdit} /> : <BioEdit action={'Create Bio'} handleEdit={handleEdit} />}
+                {/* <br/>
+                <GameList games={likeList} isMainList={false} /> */}
             </Paper>
         </Container>
     )

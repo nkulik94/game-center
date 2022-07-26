@@ -4,27 +4,38 @@ import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import GameCard from "./GameCard";
-import PageButtons from "./PageButtons";
+import LinkPageButtons from "./LinkPageButtons";
+import SimplePageButtons from "./SimplePageButtons";
 
-function GameList({ games }) {
+function GameList({ games, isMainList = true }) {
     const [pageCount, setPageCount] = useState(0)
     const [currentPage, setPage] = useState(1)
     const [listedGames, setList] = useState([])
+    const params = useParams()
 
-    const pageNum = useParams().page
+    let pageNum
+    let start
+    let end
 
-    const start = (pageNum - 1) * 18
-    const end = start + 18
+    if (isMainList) {
+        pageNum = params.page
+        start = (pageNum - 1) * 18
+        end = start + 18
+    }
 
     useEffect(() => {
         setPageCount(Math.ceil(games.length / 18))
-        setPage(parseInt(pageNum, 10))
-        setList(games.slice(start, end))
+        if (isMainList) {
+            setPage(parseInt(pageNum, 10))
+            setList(games.slice(start, end))
+        } else {
+            setList(games.slice(0, 18))
+        }
     }, [pageNum, games])
 
     if (!games) return null
 
-
+    const pageBtns = isMainList ? <LinkPageButtons pageCount={pageCount} currentPage={currentPage} /> : <SimplePageButtons setList={setList} games={games} count={pageCount} />
     return (
         <Container sx={{marginTop: '3%'}}>
             <Paper sx={{textAlign: 'center', color: '#e0e0e0'}}>
@@ -37,7 +48,7 @@ function GameList({ games }) {
                         )
                     })}
                 </Grid>
-                <PageButtons pageCount={pageCount} currentPage={currentPage} />
+                {pageBtns}
             </Paper>
         </Container>
     )

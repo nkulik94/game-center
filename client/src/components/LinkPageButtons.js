@@ -4,7 +4,7 @@ import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
 
-function PageButtons({ pageCount, currentPage }) {
+function LinkPageButtons({ pageCount, currentPage }) {
 
 
     return (
@@ -22,4 +22,4 @@ function PageButtons({ pageCount, currentPage }) {
     )
 }
 
-export default PageButtons
+export default LinkPageButtons
