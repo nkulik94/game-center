@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Route, Switch } from 'react-router-dom';
 import { UserContext } from "../context/user";
 import SignIn from "./SignIn";
@@ -10,10 +10,16 @@ import CssBaseline from '@mui/material/CssBaseline';
 import DetailedGame from "./DetailedGame";
 
 function App() {
+    const [games, setGames] = useState([])
     const getMe = useContext(UserContext).getMe
 
 
-    useEffect(() => getMe(), [])
+    useEffect(() => {
+        fetch('/games')
+            .then(r => r.json())
+            .then(setGames)
+        getMe()
+    }, [])
 
     return (
         <>
@@ -24,7 +30,7 @@ function App() {
                     <div></div>
                 </Route>
                 <Route exact path="/game-list/pages/:page">
-                    <GameList />
+                    <GameList games={games} />
                 </Route>
                 <Route path={`/game-list/:gameId`}>
                     <DetailedGame />

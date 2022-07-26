@@ -15,6 +15,7 @@ class GamesController < ApplicationController
     def update
         game = Game.find(params[:id])
         like = game.likes.find_by(user_id: session[:user_id])
+        byebug
         like ? like.destroy : game.likes.create(user_id: session[:user_id])
         render json: game
     end

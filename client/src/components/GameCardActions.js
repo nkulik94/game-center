@@ -21,7 +21,9 @@ function GameCardActions({ game, gameObj }) {
 
     useEffect(() => {
         likedIds[game.id] ? setLiked(true) : setLiked(false)
-    }, [])
+    }, [game])
+
+    const likeCounter = liked ? -1 : 1
 
     function handleError(error) {
         setError(error)
@@ -34,13 +36,13 @@ function GameCardActions({ game, gameObj }) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({likes: 1})
+            body: JSON.stringify({likes: game.likes + likeCounter})
         }
         fetch(`/games/${game.id}`, config)
             .then(r => {
                 if (r.ok) {
                     r.json().then(game => {
-                        gameObj.setList(gameObj.listedGames.map(g => g.id === game.id ? game : g))
+                        gameObj.setGames(gameObj.games.map(g => g.id === game.id ? game : g))
                         if (liked) {
                             setId({...likedIds, [game.id]: null})
                             setLikeList(likedGames.filter(g => g.id !== game.id))

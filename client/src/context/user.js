@@ -14,7 +14,7 @@ function UserProvider({ children }) {
                 res.json().then(user => {
                     setLikes(user.liked_games)
                     const newProfile = {}
-                    Object.keys(user).map(key => {
+                    Object.keys(user).forEach(key => {
                         if (!Array.isArray(user[key])) {
                             newProfile[key] = user[key]
                         }

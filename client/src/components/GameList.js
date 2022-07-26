@@ -6,8 +6,7 @@ import Grid from '@mui/material/Grid';
 import GameCard from "./GameCard";
 import PageButtons from "./PageButtons";
 
-function GameList() {
-    const [games, setGames] = useState([])
+function GameList({ games }) {
     const [pageCount, setPageCount] = useState(0)
     const [currentPage, setPage] = useState(1)
     const [listedGames, setList] = useState([])
@@ -18,17 +17,7 @@ function GameList() {
     const end = start + 18
 
     useEffect(() => {
-        function getGames() {
-            fetch('/games')
-            .then(r => r.json())
-            .then(games => {
-                setPageCount(Math.ceil(games.length / 18))
-                setGames(games)
-            })
-        }
-        if (games.length === 0) {
-            getGames()
-        }
+        setPageCount(Math.ceil(games.length / 18))
         setPage(parseInt(pageNum, 10))
         setList(games.slice(start, end))
     }, [pageNum, games.length])
@@ -43,7 +32,7 @@ function GameList() {
                     {listedGames.map(game => {
                         return (
                             <Grid item key={game.id} >
-                                <GameCard game={game} gameObj={{listedGames, setList}} />
+                                <GameCard game={game} gameObj={{games: listedGames, setGames: setList}} />
                             </Grid>
                         )
                     })}
