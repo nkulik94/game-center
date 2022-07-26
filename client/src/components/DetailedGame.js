@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
+import GameCardActions from "./GameCardActions";
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
@@ -9,7 +10,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 
-function DetailedGame() {
+function DetailedGame({ gameObj }) {
     const id = useParams().gameId
     const [game, setGame] = useState(null)
 
@@ -32,6 +33,7 @@ function DetailedGame() {
                     sx={{width: '80%', margin: 'auto'}}
                     />
                     <CardContent>
+                        <GameCardActions game={game} gameObj={gameObj} setDetailed={setGame} />
                         <Box sx={{lineHeight: '2rem'}} >
                             <Typography variant="subtitle"><strong>Platform:</strong> {game.platform}</Typography>
                             <br/>

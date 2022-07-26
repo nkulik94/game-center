@@ -55,7 +55,7 @@ end
 puts "creating ratings"
 
 User.all.each do |user|
-    rand(50..Game.count).times do
+    rand(100..Game.count).times do
         user.likes.create(game_id: Game.all.sample.id)
         puts user.likes.count
     end

@@ -33,7 +33,7 @@ function App() {
                     <GameList games={games} />
                 </Route>
                 <Route path={`/game-list/:gameId`}>
-                    <DetailedGame />
+                    <DetailedGame gameObj={{games, setGames}} />
                 </Route>
                 <Route path="/profile">
                     <ProfilePage />

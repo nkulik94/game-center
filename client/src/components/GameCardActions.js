@@ -10,7 +10,7 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ErrorMsg from "./ErrorMsg";
 
-function GameCardActions({ game, gameObj }) {
+function GameCardActions({ game, gameObj, setDetailed = false }) {
     const [error, setError] = useState('')
     const [liked, setLiked] = useState(false)
 
@@ -41,16 +41,20 @@ function GameCardActions({ game, gameObj }) {
         fetch(`/games/${game.id}`, config)
             .then(r => {
                 if (r.ok) {
-                    r.json().then(game => {
-                        gameObj.setGames(gameObj.games.map(g => g.id === game.id ? game : g))
+                    r.json().then(updatedGame => {
+                        gameObj.setGames(gameObj.games.map(g => g.id === updatedGame.id ? updatedGame : g))
                         if (liked) {
-                            setId({...likedIds, [game.id]: null})
-                            setLikeList(likedGames.filter(g => g.id !== game.id))
+                            setId({...likedIds, [updatedGame.id]: null})
+                            setLikeList(likedGames.filter(g => g.id !== updatedGame.id))
+                            setLiked(false)
                         } else {
-                            setId({...likedIds, [game.id]: game.id})
-                            setLikeList([...likedGames, game])
+                            setId({...likedIds, [updatedGame.id]: updatedGame.id})
+                            setLikeList([...likedGames, updatedGame])
+                            setLiked(true)
                         }
-                        setLiked(!liked)
+                        if (setDetailed) {
+                            setDetailed({...game, likes: updatedGame.likes})
+                        }
                     })
                 } else {
                     r.json().then(({ error }) => handleError(error))
@@ -74,9 +78,7 @@ function GameCardActions({ game, gameObj }) {
                 <Button startIcon={<ChatBubbleOutlineIcon />} >
                     10
                 </Button>
-                <Button sx={{color: '#1e88e5'}} component={Link} to={`/game-list/${game.id}`} >
-                    More
-                </Button>
+                {setDetailed ? null : <Button sx={{color: '#1e88e5'}} component={Link} to={`/game-list/${game.id}`}>More</Button>}
             </ButtonGroup>
         </CardActions>
         </>

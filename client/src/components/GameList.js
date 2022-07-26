@@ -20,7 +20,7 @@ function GameList({ games }) {
         setPageCount(Math.ceil(games.length / 18))
         setPage(parseInt(pageNum, 10))
         setList(games.slice(start, end))
-    }, [pageNum, games.length])
+    }, [pageNum, games])
 
     if (!games) return null
 
