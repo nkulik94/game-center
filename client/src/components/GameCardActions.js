@@ -16,10 +16,10 @@ function GameCardActions({ game }) {
                     {game.likes}
                 </Button>
                 <Button startIcon={<StarOutlineIcon sx={{color: 'yellow'}} />} >
-                    {game.average_rating ? game.average_rating : 'N/A'}
+                    4.7
                 </Button>
                 <Button startIcon={<ChatBubbleOutlineIcon />} >
-                    {game.review_count}
+                    10
                 </Button>
                 <Button sx={{color: '#1e88e5'}} component={Link} to={`/game-list/${game.id}`} >
                     More

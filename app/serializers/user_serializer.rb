@@ -5,12 +5,6 @@ class UserSerializer < ActiveModel::Serializer
     "#{self.object.first_name} #{self.object.last_name}"
   end
 
-  # def likes
-  #   self.object.user_games.map do |game|
-  #     if game.liked
-  #       game.game
-  #     end
-  #   end
-  # end
-
+  has_many :liked_games
+  has_many :reviewed_games
 end

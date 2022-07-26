@@ -1,6 +1,8 @@
 class Game < ApplicationRecord
     has_many :likes
-    has_many :users, through: :likes
+    has_many :liking_users, through: :likes, source: :user
+    has_many :reviews
+    has_many :reviewing_users, through: :reviews, source: :user
 
     def get_description
         response = RestClient.get "https://www.freetogame.com/api/game?id=#{self.ftg_id}"
