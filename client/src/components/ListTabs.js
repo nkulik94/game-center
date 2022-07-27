@@ -11,10 +11,12 @@ import GameList from "./GameList";
 function ListTabs() {
     const [value, setValue] = useState('0')
     const [searched, setSearched] = useState('')
-    
+
     const likeList = useContext(UserContext).likedGames
+    const rateList = useContext(UserContext).ratedGames
 
     const filteredLikes = likeList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
+    const filteredRates = rateList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
     return (
         <Box>
             <TabContext value={value} >
@@ -29,7 +31,7 @@ function ListTabs() {
                 <GameList games={filteredLikes} isMainList={false} searched={searched} setSearched={setSearched} />
             </TabPanel>
             <TabPanel value='1'>
-                hello
+            <GameList games={filteredRates} isMainList={false} searched={searched} setSearched={setSearched} />
             </TabPanel>
             <TabPanel value='2'>
                 dude

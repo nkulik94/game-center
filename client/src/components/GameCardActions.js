@@ -7,21 +7,25 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
+import StarRateIcon from '@mui/icons-material/StarRate';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ErrorMsg from "./ErrorMsg";
 
 function GameCardActions({ game, gameObj, setDetailed = false }) {
     const [error, setError] = useState('')
     const [liked, setLiked] = useState(false)
+    const [rated, setRated] = useState(false)
 
     const likedIds = useContext(UserContext).likedIds
     const likedGames = useContext(UserContext).likedGames
     const setLikeList = useContext(UserContext).setLikes
     const setId = useContext(UserContext).setId
+    const ratedIds = useContext(UserContext).ratedIds
 
     useEffect(() => {
         likedIds[game.id] ? setLiked(true) : setLiked(false)
-    }, [game, likedIds])
+        ratedIds[game.id] ? setRated(true) : setRated(false)
+    }, [game, likedIds, ratedIds])
 
     const likeCounter = liked ? -1 : 1
 
@@ -64,6 +68,8 @@ function GameCardActions({ game, gameObj, setDetailed = false }) {
 
     const likeBtn = liked ? <FavoriteIcon sx={{color: 'red'}} onClick={handleLikes} /> : <FavoriteBorderIcon sx={{color: 'red'}} onClick={handleLikes} />
 
+    const rateBtn = rated ? <StarRateIcon sx={{color: 'yellow'}} /> : <StarOutlineIcon sx={{color: 'yellow'}} />
+
     return (
         <>
         {error ? <ErrorMsg error={error} /> : null}
@@ -72,7 +78,7 @@ function GameCardActions({ game, gameObj, setDetailed = false }) {
                 <Button startIcon={likeBtn} >
                     {game.likes}
                 </Button>
-                <Button startIcon={<StarOutlineIcon sx={{color: 'yellow'}} />} >
+                <Button startIcon={rateBtn} >
                     {game.rating}
                 </Button>
                 <Button startIcon={<ChatBubbleOutlineIcon />} >

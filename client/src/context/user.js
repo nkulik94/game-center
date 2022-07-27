@@ -3,11 +3,11 @@ import React, { useState } from "react";
 const UserContext = React.createContext();
 
 function UserProvider({ children }) {
-    const [likedGames, setLikes] = useState(null)
+    const [likedGames, setLikes] = useState([])
     const [profile, setProfile] = useState(null)
     const [likedIds, setId] = useState({})
-    const [ratedGames, setRates] = useState(null)
-    const [ratedIds, setRateId] = useState(null)
+    const [ratedGames, setRates] = useState([])
+    const [ratedIds, setRateId] = useState({})
 
     function setUpUser(user) {
         //console.log(user)
@@ -35,9 +35,9 @@ function UserProvider({ children }) {
 
     function signOut() {
         setProfile(null)
-        setLikes(null)
+        setLikes([])
         setId({})
-        setRates(null)
+        setRates([])
         setRateId({})
     }
 
