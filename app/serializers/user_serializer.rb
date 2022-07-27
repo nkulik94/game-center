@@ -6,4 +6,5 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   has_many :liked_games
+  has_many :rated_games
 end

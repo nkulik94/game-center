@@ -45,18 +45,19 @@ end
 
 puts "getting descriptions..."
 
-Game.all.each do |game|
-    puts game.title
-    # This is to avoid going over freetogame rate limit
-    sleep(0.30)
-    game.get_description
-end
+# Game.all.each do |game|
+#     puts game.title
+#     # This is to avoid going over freetogame rate limit
+#     sleep(0.30)
+#     game.get_description
+# end
 
 puts "creating ratings"
 
 User.all.each do |user|
     rand(100..Game.count).times do
         user.likes.create(game_id: Game.all.sample.id)
+        user.ratings.create(game_id: Game.all.sample.id, rating: rand(1..5))
         puts user.likes.count
     end
 end

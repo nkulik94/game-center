@@ -1,6 +1,8 @@
 class Game < ApplicationRecord
     has_many :likes
     has_many :liking_users, through: :likes, source: :user
+    has_many :ratings
+    has_many :rating_users, through: :ratings, source: :user
     has_many :reviews
 
     def get_description
