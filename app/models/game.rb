@@ -8,4 +8,5 @@ class Game < ApplicationRecord
         game = JSON.parse(response)
         self.update(description: game['description'])
     end
+
 end
