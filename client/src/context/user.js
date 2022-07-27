@@ -10,9 +10,8 @@ function UserProvider({ children }) {
     const [ratedIds, setRateId] = useState(null)
 
     function setUpUser(user) {
-        console.log(user)
+        //console.log(user)
         setLikes(user.liked_games)
-        setRates(user.ratedGames)
         const newProfile = {}
         Object.keys(user).forEach(key => {
             if (!Array.isArray(user[key])) {
@@ -24,13 +23,22 @@ function UserProvider({ children }) {
         user.liked_games.map(game => likedIdObj[game.id] = game.id)
         setId(likedIdObj)
         const rateIdObj = {}
-
+        const ratedGamesArr = user.ratings.map(rating => {
+            rateIdObj[rating.game_id] = rating.rating
+            const ratedGameObj = {}
+            Object.keys(rating.game).map(key => ratedGameObj[key] = key === 'rating' ? rating.rating : rating.game[key])
+            return ratedGameObj
+        })
+        setRates(ratedGamesArr)
+        setRateId(rateIdObj)
     }
 
     function signOut() {
         setProfile(null)
         setLikes(null)
         setId({})
+        setRates(null)
+        setRateId({})
     }
 
     function getMe() {
@@ -50,7 +58,11 @@ function UserProvider({ children }) {
         setId,
         likedIds,
         setUpUser,
-        signOut
+        signOut,
+        ratedGames,
+        setRates,
+        ratedIds,
+        setRateId
     }
 
     return <UserContext.Provider value={currentUser}>{children}</UserContext.Provider>;

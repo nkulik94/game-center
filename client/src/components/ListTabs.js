@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../context/user";
 import TabList from '@mui/lab/TabList';
 import Tab from '@mui/material/Tab';
 import TabPanel from '@mui/lab/TabPanel';
@@ -7,9 +8,11 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import GameList from "./GameList";
 
-function ListTabs({ likeList }) {
+function ListTabs() {
     const [value, setValue] = useState('0')
     const [searched, setSearched] = useState('')
+    
+    const likeList = useContext(UserContext).likedGames
 
     const filteredLikes = likeList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
     return (

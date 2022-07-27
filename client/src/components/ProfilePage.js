@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { UserContext } from '../context/user';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -12,17 +11,11 @@ import Bio from './Bio';
 import BioEdit from './BioEdit';
 import AvatarEdit from './AvatarEdit';
 import ListTabs from './ListTabs';
-import GameList from './GameList';
 
 function ProfilePage() {
 
     const profile = useContext(UserContext).user
     const setUser = useContext(UserContext).setUser
-    const likeList = useContext(UserContext).likedGames
-
-    const history = useHistory()
-
-    //if (!profile) history.goBack()
 
     if (!profile) return null
 
@@ -75,9 +68,7 @@ function ProfilePage() {
                     {profile.tier}
                 </Typography>
                 {profile.bio ? <Bio bio={profile.bio} id={profile.id} handleEdit={handleEdit} /> : <BioEdit action={'Create Bio'} handleEdit={handleEdit} />}
-                <ListTabs likeList={likeList} />
-                {/* <br/>
-                <GameList games={likeList} isMainList={false} /> */}
+                <ListTabs />
             </Paper>
         </Container>
     )

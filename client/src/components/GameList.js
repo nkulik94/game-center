@@ -11,11 +11,7 @@ function GameList({ games, isMainList = true, searched, setSearched }) {
     const [pageCount, setPageCount] = useState(0)
     const [currentPage, setPage] = useState(1)
     const [listedGames, setList] = useState([])
-    //const [searched, setSearched] = useState('')
     const params = useParams()
-
-    // const match = useRouteMatch()
-    // console.log(match)
 
     let pageNum
     let start
