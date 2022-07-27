@@ -12,7 +12,9 @@ class Game < ApplicationRecord
     end
 
     def calculate_and_set_rating
-        rating = self.ratings.average(:rating).round(1)
-        self.update(rating: rating)
+        if ratings.count > 0
+            rating = self.ratings.average(:rating).round(1)
+            self.update(rating: rating)
+        end
     end
 end

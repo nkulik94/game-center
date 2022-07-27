@@ -45,12 +45,12 @@ end
 
 puts "getting descriptions..."
 
-Game.all.each do |game|
-    puts game.title
-    # This is to avoid going over freetogame rate limit
-    sleep(0.30)
-    game.get_description
-end
+# Game.all.each do |game|
+#     puts game.title
+#     # This is to avoid going over freetogame rate limit
+#     sleep(0.30)
+#     game.get_description
+# end
 
 puts "creating ratings"
 

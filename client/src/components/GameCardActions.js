@@ -94,7 +94,7 @@ function GameCardActions({ game, setDetailed = false }) {
                     {game.likes}
                 </Button>
                 <Button startIcon={rateBtn} >
-                    {game.rating}
+                    {game.rating ? game.rating : 'N/A'}
                 </Button>
                 <Button startIcon={<ChatBubbleOutlineIcon />} >
                     10
