@@ -39,10 +39,10 @@ function GameList({ games, isMainList = true }) {
     return (
         <Container sx={{marginTop: '3%'}}>
             <Paper sx={{textAlign: 'center', color: '#e0e0e0'}}>
-                <Grid container spacing={2} >
+                <Grid sx={{width: 'fit-content', margin: 'auto'}} container spacing={2} >
                     {listedGames.map(game => {
                         return (
-                            <Grid item key={game.id} >
+                            <Grid sx={{width: 'fit-content', margin: 'auto'}} item key={game.id} >
                                 <GameCard game={game} gameObj={{games: listedGames, setGames: setList}} />
                             </Grid>
                         )
