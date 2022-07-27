@@ -5,7 +5,8 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import ProfilePage from "./ProfilePage";
 import NavAppBar from "./NavAppBar";
-import GameList from "./GameList";
+import GamePage from "./GamePage";
+import Home from "./Home";
 import CssBaseline from '@mui/material/CssBaseline';
 import DetailedGame from "./DetailedGame";
 
@@ -27,10 +28,10 @@ function App() {
             <NavAppBar />
             <Switch>
                 <Route exact path="/">
-                    <div></div>
+                    <Home />
                 </Route>
                 <Route exact path="/game-list/:page">
-                    <GameList games={games} />
+                    <GamePage games={games} />
                 </Route>
                 <Route path={`/game-details/:gameId`}>
                     <DetailedGame gameObj={{games, setGames}} />

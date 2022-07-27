@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useRouteMatch } from 'react-router-dom';
-import Container from '@mui/material/Container';
+import { useParams } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import GameCard from "./GameCard";
 import LinkPageButtons from "./LinkPageButtons";
 import SimplePageButtons from "./SimplePageButtons";
+import SearchBar from "./SearchBar";
 
-function GameList({ games, isMainList = true }) {
+function GameList({ games, isMainList = true, searched, setSearched }) {
     const [pageCount, setPageCount] = useState(0)
     const [currentPage, setPage] = useState(1)
     const [listedGames, setList] = useState([])
+    //const [searched, setSearched] = useState('')
     const params = useParams()
 
-    const match = useRouteMatch()
-    console.log(match)
+    // const match = useRouteMatch()
+    // console.log(match)
 
     let pageNum
     let start
@@ -42,20 +43,19 @@ function GameList({ games, isMainList = true }) {
 
     const pageBtns = isMainList ? <LinkPageButtons pageCount={pageCount} currentPage={currentPage} /> : <SimplePageButtons setList={setList} games={games} count={pageCount} />
     return (
-        <Container sx={{marginTop: '3%'}}>
-            <Paper sx={{textAlign: 'center', color: '#e0e0e0'}}>
-                <Grid sx={{width: 'fit-content', margin: 'auto'}} container spacing={2} >
-                    {listedGames.map(game => {
+        <Paper sx={{textAlign: 'center', color: '#e0e0e0'}}>
+            <SearchBar searched={searched} setSearched={setSearched} />
+            <Grid sx={{width: 'fit-content', margin: 'auto'}} container spacing={2} >
+                {listedGames.map(game => {
                         return (
-                            <Grid sx={{width: 'fit-content', margin: 'auto'}} item key={game.id} >
-                                <GameCard game={game} gameObj={{games: listedGames, setGames: setList}} />
-                            </Grid>
-                        )
-                    })}
-                </Grid>
-                {pageBtns}
-            </Paper>
-        </Container>
+                        <Grid sx={{width: 'fit-content', margin: 'auto'}} item key={game.id} >
+                            <GameCard game={game} gameObj={{games: listedGames, setGames: setList}} />
+                        </Grid>
+                    )
+                })}
+            </Grid>
+            {pageBtns}
+        </Paper>
     )
 }
 
