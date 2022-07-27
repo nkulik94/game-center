@@ -11,4 +11,8 @@ class Game < ApplicationRecord
         self.update(description: game['description'])
     end
 
+    def calculate_and_set_rating
+        rating = self.ratings.average(:rating).round(1)
+        self.update(rating: rating)
+    end
 end

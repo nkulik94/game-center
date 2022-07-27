@@ -5,10 +5,10 @@ class GameSerializer < ActiveModel::Serializer
     self.object.likes.count
   end
 
-  def rating
-    if self.object.ratings.count > 0
-      average = self.object.ratings.average(:rating)
-      average.round(1)
-    end
-  end
+  # def rating
+  #   if self.object.ratings.count > 0
+  #     average = self.object.ratings.average(:rating)
+  #     average.round(1)
+  #   end
+  # end
 end
