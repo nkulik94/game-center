@@ -45,7 +45,7 @@ function GameList({ games, isMainList = true, searched, setSearched }) {
                 {listedGames.map(game => {
                         return (
                         <Grid sx={{width: 'fit-content', margin: 'auto'}} item key={game.id} >
-                            <GameCard game={game} gameObj={{games: listedGames, setGames: setList}} />
+                            <GameCard game={game} />
                         </Grid>
                     )
                 })}

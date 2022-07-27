@@ -5,7 +5,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import GameCardActions from "./GameCardActions";
 
-function GameCard({ game, gameObj }) {
+function GameCard({ game }) {
+
     return (
         <Card sx={{ maxWidth: 300 }} >
             <CardMedia
@@ -20,7 +21,7 @@ function GameCard({ game, gameObj }) {
                     {game.short_description}
                 </Typography>
             </CardContent>
-            <GameCardActions game={game} gameObj={gameObj} />
+            <GameCardActions game={game} />
         </Card>
     )
 }

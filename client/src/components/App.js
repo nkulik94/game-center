@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Route, Switch } from 'react-router-dom';
 import { UserContext } from "../context/user";
+import { GamesContext } from "../context/games";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import ProfilePage from "./ProfilePage";
@@ -11,16 +12,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import DetailedGame from "./DetailedGame";
 
 function App() {
-    const [games, setGames] = useState([])
+    //const [games, setGames] = useState([])
     const getMe = useContext(UserContext).getMe
 
+    // const games = useContext(GamesContext).games
+    // const setGames = useContext(GamesContext).setGames
 
-    useEffect(() => {
-        fetch('/games')
-            .then(r => r.json())
-            .then(setGames)
-        getMe()
-    }, [])
+
+    useEffect(getMe, [])
 
     return (
         <>
@@ -31,10 +30,10 @@ function App() {
                     <Home />
                 </Route>
                 <Route exact path="/game-list/:page">
-                    <GamePage games={games} />
+                    <GamePage />
                 </Route>
                 <Route path={`/game-details/:gameId`}>
-                    <DetailedGame gameObj={{games, setGames}} />
+                    <DetailedGame />
                 </Route>
                 <Route path="/profile">
                     <ProfilePage />

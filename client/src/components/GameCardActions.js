@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/user";
+import { GamesContext } from "../context/games";
 import { Link } from 'react-router-dom';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
@@ -11,7 +12,7 @@ import StarRateIcon from '@mui/icons-material/StarRate';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ErrorMsg from "./ErrorMsg";
 
-function GameCardActions({ game, gameObj, setDetailed = false }) {
+function GameCardActions({ game, setDetailed = false }) {
     const [error, setError] = useState('')
     const [liked, setLiked] = useState(false)
     const [rated, setRated] = useState(false)
@@ -21,6 +22,11 @@ function GameCardActions({ game, gameObj, setDetailed = false }) {
     const setLikeList = useContext(UserContext).setLikes
     const setId = useContext(UserContext).setId
     const ratedIds = useContext(UserContext).ratedIds
+    const rateList = useContext(UserContext).ratedGames
+    const setRateList = useContext(UserContext).setRates
+
+    const setGames = useContext(GamesContext).setGames
+    const allGames = useContext(GamesContext).games
 
     useEffect(() => {
         likedIds[game.id] ? setLiked(true) : setLiked(false)
@@ -32,6 +38,11 @@ function GameCardActions({ game, gameObj, setDetailed = false }) {
     function handleError(error) {
         setError(error)
         setTimeout(() => setError(''), 3000)
+    }
+
+    function updateListForLikes(game, updatedGame) {
+        game.likes = game.id === updatedGame.id ? updatedGame.likes : game.likes
+        return game
     }
 
     function handleLikes() {
@@ -46,7 +57,6 @@ function GameCardActions({ game, gameObj, setDetailed = false }) {
             .then(r => {
                 if (r.ok) {
                     r.json().then(updatedGame => {
-                        gameObj.setGames(gameObj.games.map(g => g.id === updatedGame.id ? updatedGame : g))
                         if (liked) {
                             setId({...likedIds, [updatedGame.id]: null})
                             setLikeList(likedGames.filter(g => g.id !== updatedGame.id))
@@ -56,6 +66,10 @@ function GameCardActions({ game, gameObj, setDetailed = false }) {
                             setLikeList([...likedGames, updatedGame])
                             setLiked(true)
                         }
+                        if (rated) {
+                            setRateList(rateList.map(game => updateListForLikes(game, updatedGame)))
+                        }
+                        setGames(allGames.map(game => updateListForLikes(game, updatedGame)))
                         if (setDetailed) {
                             setDetailed({...game, likes: updatedGame.likes})
                         }
@@ -70,6 +84,7 @@ function GameCardActions({ game, gameObj, setDetailed = false }) {
 
     const rateBtn = rated ? <StarRateIcon sx={{color: 'yellow'}} /> : <StarOutlineIcon sx={{color: 'yellow'}} />
 
+    //console.log(game)
     return (
         <>
         {error ? <ErrorMsg error={error} /> : null}

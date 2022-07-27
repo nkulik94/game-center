@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :ratings
   resources :reviews
-  resources :likes, only: [:create, :destroy]
   resources :games, only: [:index, :show, :update]
   post "/signup", to: "users#create"
 

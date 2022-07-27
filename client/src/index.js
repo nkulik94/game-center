@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
 import './index.css';
 import { UserProvider } from './context/user';
+import { GamesProvider } from './context/games';
 import App from './components/App';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -26,7 +27,9 @@ ReactDOM.render(
     <ThemeProvider theme={theme} >
       <BrowserRouter>
         <UserProvider>
-          <App />
+          <GamesProvider>
+            <App />
+          </GamesProvider>
         </UserProvider>
       </BrowserRouter>
     </ThemeProvider>,

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/user";
 import TabList from '@mui/lab/TabList';
 import Tab from '@mui/material/Tab';
@@ -11,12 +11,19 @@ import GameList from "./GameList";
 function ListTabs() {
     const [value, setValue] = useState('0')
     const [searched, setSearched] = useState('')
+    const [filteredLikes, setFilteredLikes] = useState([])
+    const [filteredRates, setFilteredRates] = useState([])
 
     const likeList = useContext(UserContext).likedGames
     const rateList = useContext(UserContext).ratedGames
 
-    const filteredLikes = likeList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
-    const filteredRates = rateList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
+    useEffect(() => {
+        setFilteredLikes(likeList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase())))
+        setFilteredRates(rateList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase())))
+    }, [searched, likeList, rateList])
+
+    //const filteredLikes = likeList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
+    //const filteredRates = rateList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
     return (
         <Box>
             <TabContext value={value} >
