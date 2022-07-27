@@ -73,7 +73,7 @@ function GameCardActions({ game, gameObj, setDetailed = false }) {
                     {game.likes}
                 </Button>
                 <Button startIcon={<StarOutlineIcon sx={{color: 'yellow'}} />} >
-                    {game.average_rating}
+                    {game.rating}
                 </Button>
                 <Button startIcon={<ChatBubbleOutlineIcon />} >
                     10

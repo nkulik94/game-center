@@ -6,9 +6,13 @@ function UserProvider({ children }) {
     const [likedGames, setLikes] = useState(null)
     const [profile, setProfile] = useState(null)
     const [likedIds, setId] = useState({})
+    const [ratedGames, setRates] = useState(null)
+    const [ratedIds, setRateId] = useState(null)
 
     function setUpUser(user) {
+        console.log(user)
         setLikes(user.liked_games)
+        setRates(user.ratedGames)
         const newProfile = {}
         Object.keys(user).forEach(key => {
             if (!Array.isArray(user[key])) {
@@ -16,9 +20,11 @@ function UserProvider({ children }) {
             }
         })
         setProfile(newProfile)
-        const ids = {}
-        user.liked_games.map(game => ids[game.id] = game.id)
-        setId(ids)
+        const likedIdObj = {}
+        user.liked_games.map(game => likedIdObj[game.id] = game.id)
+        setId(likedIdObj)
+        const rateIdObj = {}
+
     }
 
     function signOut() {

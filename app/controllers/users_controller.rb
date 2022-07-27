@@ -5,12 +5,12 @@ class UsersController < ApplicationController
     def create
         user = User.create!(user_params)
         session[:user_id] = user.id
-        render json: user, status: :created
+        render json: user, include: ['liked_games', 'ratings', 'ratings.game'], status: :created
     end
 
     def show
         if session[:user_id]
-            render json: User.find(session[:user_id]), status: :created
+            render json: User.find(session[:user_id]), include: ['liked_games', 'ratings', 'ratings.game'], status: :created
         else
             render json: { error: "Unauthorized" }, status: :unauthorized
         end
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     def update
         user = User.find(params[:id])
         user.update!(user_params)
-        render json: user
+        render json: user, include: ['liked_games', 'ratings', 'ratings.game']
     end
 
     private
