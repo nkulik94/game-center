@@ -29,10 +29,10 @@ function App() {
                 <Route exact path="/">
                     <div></div>
                 </Route>
-                <Route exact path="/game-list/pages/:page">
+                <Route exact path="/game-list/:page">
                     <GameList games={games} />
                 </Route>
-                <Route path={`/game-list/:gameId`}>
+                <Route path={`/game-details/:gameId`}>
                     <DetailedGame gameObj={{games, setGames}} />
                 </Route>
                 <Route path="/profile">

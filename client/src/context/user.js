@@ -22,8 +22,8 @@ function UserProvider({ children }) {
     }
 
     function signOut() {
-        setLikes(null)
         setProfile(null)
+        setLikes(null)
         setId({})
     }
 

@@ -78,7 +78,7 @@ function GameCardActions({ game, gameObj, setDetailed = false }) {
                 <Button startIcon={<ChatBubbleOutlineIcon />} >
                     10
                 </Button>
-                {setDetailed ? null : <Button sx={{color: '#1e88e5'}} component={Link} to={`/game-list/${game.id}`}>More</Button>}
+                {setDetailed ? null : <Button sx={{color: '#1e88e5'}} component={Link} to={`/game-details/${game.id}`}>More</Button>}
             </ButtonGroup>
         </CardActions>
         </>

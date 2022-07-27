@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, useRouteMatch } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -13,6 +13,9 @@ function GameList({ games, isMainList = true }) {
     const [listedGames, setList] = useState([])
     const params = useParams()
 
+    const match = useRouteMatch()
+    console.log(match)
+
     let pageNum
     let start
     let end
@@ -24,12 +27,14 @@ function GameList({ games, isMainList = true }) {
     }
 
     useEffect(() => {
-        setPageCount(Math.ceil(games.length / 18))
-        if (isMainList) {
-            setPage(parseInt(pageNum, 10))
-            setList(games.slice(start, end))
-        } else {
-            setList(games.slice(0, 18))
+        if (games) {
+            setPageCount(Math.ceil(games.length / 18))
+            if (isMainList) {
+                setPage(parseInt(pageNum, 10))
+                setList(games.slice(start, end))
+            } else {
+                setList(games.slice(0, 18))
+            }
         }
     }, [pageNum, games])
 

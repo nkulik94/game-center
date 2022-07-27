@@ -15,7 +15,7 @@ function LinkPageButtons({ pageCount, currentPage }) {
             shape="rounded"
             page={currentPage}
             renderItem={item => (
-                <PaginationItem component={Link} to={`/game-list/pages/${item.page}`} {...item} />
+                <PaginationItem component={Link} to={`/game-list/${item.page}`} {...item} />
             )}
             />
         </Stack>
