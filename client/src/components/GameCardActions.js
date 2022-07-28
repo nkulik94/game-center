@@ -12,20 +12,25 @@ import StarRateIcon from '@mui/icons-material/StarRate';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ErrorMsg from "./ErrorMsg";
 import RateDialog from "./RateDialog";
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 
 function GameCardActions({ game, setDetailed = false }) {
     const [error, setError] = useState('')
     const [liked, setLiked] = useState(false)
     const [rated, setRated] = useState(false)
+    const [reviewed, setReviewed] = useState(false)
     const [open, setOpen] = useState(false)
 
-    const likedIds = useContext(UserContext).likedIds
-    const likedGames = useContext(UserContext).likedGames
-    const setLikeList = useContext(UserContext).setLikes
-    const setId = useContext(UserContext).setId
-    const ratedIds = useContext(UserContext).ratedIds
-    const rateList = useContext(UserContext).ratedGames
-    const setRateList = useContext(UserContext).setRates
+    const userContext = useContext(UserContext)
+
+    const likedIds = userContext.likedIds
+    const likedGames = userContext.likedGames
+    const setLikeList = userContext.setLikes
+    const setId = userContext.setId
+    const ratedIds = userContext.ratedIds
+    const rateList = userContext.ratedGames
+    const setRateList = userContext.setRates
+    const reviewIds = userContext.reviewIds
 
     const setGames = useContext(GamesContext).setGames
     const allGames = useContext(GamesContext).games
@@ -33,7 +38,8 @@ function GameCardActions({ game, setDetailed = false }) {
     useEffect(() => {
         likedIds[game.id] ? setLiked(true) : setLiked(false)
         ratedIds[game.id] ? setRated(true) : setRated(false)
-    }, [game, likedIds, ratedIds])
+        reviewIds[game.id] ? setReviewed(true) : setReviewed(false)
+    }, [game, likedIds, ratedIds, reviewIds])
 
     const likeCounter = liked ? -1 : 1
 
@@ -87,7 +93,10 @@ function GameCardActions({ game, setDetailed = false }) {
     function handleOpen() {
         setOpen(!open)
     }
+
     const rateBtn = rated ? <StarRateIcon onClick={handleOpen} sx={{color: 'yellow'}} /> : <StarOutlineIcon onClick={handleOpen} sx={{color: 'yellow'}} />
+
+    const reviewBtn = reviewed ? <ChatBubbleIcon /> : <ChatBubbleOutlineIcon />
 
     return (
         <>
@@ -100,8 +109,8 @@ function GameCardActions({ game, setDetailed = false }) {
                 <Button startIcon={rateBtn} >
                     {game.rating ? game.rating : 'N/A'}
                 </Button>
-                <Button startIcon={<ChatBubbleOutlineIcon />} >
-                    10
+                <Button startIcon={reviewBtn} >
+                    {game.review_count}
                 </Button>
                 {setDetailed ? null : <Button sx={{color: '#1e88e5'}} component={Link} to={`/game-details/${game.id}`}>More</Button>}
             </ButtonGroup>
