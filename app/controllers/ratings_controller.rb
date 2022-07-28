@@ -1,5 +1,5 @@
 class RatingsController < ApplicationController
-    #before_action :authorize
+    before_action :authorize
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
@@ -11,6 +11,13 @@ class RatingsController < ApplicationController
         game = Game.find(params[:game_id])
         rating = game.ratings.create!(rating: params[:rating], user_id: session[:user_id])
         game.calculate_and_set_rating
+        render json: rating, serializer: RatingCreateUpdateSerializer
+    end
+
+    def update
+        rating = Rating.find(params[:id])
+        rating.update(rating: params[:rating])
+        rating.game.calculate_and_set_rating
         render json: rating, serializer: RatingCreateUpdateSerializer
     end
 

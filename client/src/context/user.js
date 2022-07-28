@@ -10,7 +10,6 @@ function UserProvider({ children }) {
     const [ratedIds, setRateId] = useState({})
 
     function setUpUser(user) {
-        //console.log(user)
         setLikes(user.liked_games)
         const newProfile = {}
         Object.keys(user).forEach(key => {
@@ -24,7 +23,7 @@ function UserProvider({ children }) {
         setId(likedIdObj)
         const rateIdObj = {}
         const ratedGamesArr = user.ratings.map(rating => {
-            rateIdObj[rating.game_id] = rating.rating
+            rateIdObj[rating.game_id] = rating.id
             const ratedGameObj = {}
             Object.keys(rating.game).map(key => ratedGameObj[key] = key === 'rating' ? rating.rating : rating.game[key])
             return ratedGameObj
