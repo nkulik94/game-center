@@ -32,6 +32,45 @@ function RateDialog({ gameId, open, setOpen, setDetailed, liked, updateLists }) 
         setCurrentRating(ratingObj ? ratingObj.rating : 0)
     }
 
+    function handleLists(updatedGame) {
+        gameContext.setGames(gameContext.games.map(game => updateLists(game, updatedGame, 'rating')))
+        if (liked) {
+            userContext.setLikes(likeList.map(game => updateLists(game, updatedGame, 'rating')))
+        }
+        if (setDetailed) {
+            setDetailed('rating', updatedGame.rating)
+        }
+    }
+
+    function handleNewRating() {
+        setOpen(false)
+        const method = rating ? 'PATCH' : 'POST'
+        const url = rating ? `/ratings/${ratingObj.id}` : '/ratings'
+        const config = {
+            method: method,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({rating: currentRating, game_id: gameId})
+        }
+        fetch(url, config)
+        .then(r => {
+            if (r.ok) {
+                r.json().then(updatedRating => {
+                    const rateListGame = {...updatedRating.game, rating: updatedRating.rating}
+                    if (rating) {
+                        userContext.setRates(ratedGameList.map(game => game.id === rateListGame.id ? rateListGame : game))
+                    } else {
+                        userContext.setRates([...ratedGameList, rateListGame])
+                    }
+                    userContext.ratedIds[gameId] = {rating: updatedRating.rating, id: updatedRating.id}
+                    userContext.setRateId({...userContext.ratedIds})
+                    handleLists(updatedRating.game)
+                })
+            }
+        })
+    }
+
     function handleDelete() {
         setOpen(false)
         const id = ratingObj.id
@@ -41,13 +80,7 @@ function RateDialog({ gameId, open, setOpen, setDetailed, liked, updateLists }) 
                 userContext.setRates(ratedGameList.filter(game => game.id !== updatedGame.id))
                 delete userContext.ratedIds[gameId]
                 userContext.setRateId({...userContext.ratedIds})
-                gameContext.setGames(gameContext.games.map(game => updateLists(game, updatedGame, 'rating')))
-                if (liked) {
-                    userContext.setLikes(likeList.map(game => updateLists(game, updatedGame, 'rating')))
-                }
-                if (setDetailed) {
-                    setDetailed('rating', updatedGame.rating)
-                }
+                handleLists(updatedGame)
             })
     }
 
@@ -59,7 +92,7 @@ function RateDialog({ gameId, open, setOpen, setDetailed, liked, updateLists }) 
                 </ButtonGroup>
             </DialogContent>
             <DialogActions>
-                <Button>Save</Button>
+                <Button onClick={handleNewRating}>Save</Button>
                 <Button onClick={handleCancel} >Cancel</Button>
                 {rating ? <Button color="error" onClick={handleDelete} >Delete</Button> : null}
             </DialogActions>
