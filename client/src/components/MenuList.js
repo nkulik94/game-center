@@ -20,7 +20,7 @@ function MenuList({ onClickList }) {
                     const link = option === 'Games' ? 'game-list/1' : option.toLowerCase()
                     return (
                         <ListItem key={option} disablePadding>
-                            <ListItemButton component={Link} to={`/${link}`} >
+                            <ListItemButton component={Link} to={link === 'home' ? "/" : `/${link}`} >
                                 <ListItemText primary={option} />
                             </ListItemButton>
                         </ListItem>

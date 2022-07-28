@@ -84,7 +84,6 @@ function GameCardActions({ game, setDetailed = false }) {
 
     const rateBtn = rated ? <StarRateIcon sx={{color: 'yellow'}} /> : <StarOutlineIcon sx={{color: 'yellow'}} />
 
-    //console.log(game)
     return (
         <>
         {error ? <ErrorMsg error={error} /> : null}

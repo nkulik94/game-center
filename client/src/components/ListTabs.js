@@ -11,19 +11,12 @@ import GameList from "./GameList";
 function ListTabs() {
     const [value, setValue] = useState('0')
     const [searched, setSearched] = useState('')
-    const [filteredLikes, setFilteredLikes] = useState([])
-    const [filteredRates, setFilteredRates] = useState([])
 
     const likeList = useContext(UserContext).likedGames
     const rateList = useContext(UserContext).ratedGames
 
-    useEffect(() => {
-        setFilteredLikes(likeList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase())))
-        setFilteredRates(rateList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase())))
-    }, [searched, likeList, rateList])
-
-    //const filteredLikes = likeList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
-    //const filteredRates = rateList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
+    const filteredLikes = likeList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
+    const filteredRates = rateList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
     return (
         <Box>
             <TabContext value={value} >
