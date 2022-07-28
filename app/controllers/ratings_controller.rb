@@ -21,6 +21,14 @@ class RatingsController < ApplicationController
         render json: rating, serializer: RatingCreateUpdateSerializer
     end
 
+    def destroy
+        rating = Rating.find(params[:id])
+        game = rating.game
+        rating.destroy
+        game.calculate_and_set_rating
+        render json: game
+    end
+
     private
 
     def rating_params

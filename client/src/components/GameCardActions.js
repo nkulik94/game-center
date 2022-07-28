@@ -11,11 +11,13 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ErrorMsg from "./ErrorMsg";
+import RateDialog from "./RateDialog";
 
 function GameCardActions({ game, setDetailed = false }) {
     const [error, setError] = useState('')
     const [liked, setLiked] = useState(false)
     const [rated, setRated] = useState(false)
+    const [open, setOpen] = useState(false)
 
     const likedIds = useContext(UserContext).likedIds
     const likedGames = useContext(UserContext).likedGames
@@ -82,7 +84,10 @@ function GameCardActions({ game, setDetailed = false }) {
 
     const likeBtn = liked ? <FavoriteIcon sx={{color: 'red'}} onClick={handleLikes} /> : <FavoriteBorderIcon sx={{color: 'red'}} onClick={handleLikes} />
 
-    const rateBtn = rated ? <StarRateIcon sx={{color: 'yellow'}} /> : <StarOutlineIcon sx={{color: 'yellow'}} />
+    function handleOpen() {
+        setOpen(!open)
+    }
+    const rateBtn = rated ? <StarRateIcon onClick={handleOpen} sx={{color: 'yellow'}} /> : <StarOutlineIcon onClick={handleOpen} sx={{color: 'yellow'}} />
 
     return (
         <>
@@ -100,6 +105,13 @@ function GameCardActions({ game, setDetailed = false }) {
                 </Button>
                 {setDetailed ? null : <Button sx={{color: '#1e88e5'}} component={Link} to={`/game-details/${game.id}`}>More</Button>}
             </ButtonGroup>
+            <RateDialog
+                rating={ratedIds[game.id] ? ratedIds[game.id] : 0}
+                open={open}
+                setOpen={setOpen}
+                setDetailed={setDetailed}
+                liked={liked}
+            />
         </CardActions>
         </>
     )
