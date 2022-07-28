@@ -7,9 +7,11 @@ import DialogContent from '@mui/material/DialogContent';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import RateStarBtn from "./RateStarBtn";
 import Button from '@mui/material/Button';
+import ErrorMsg from "./ErrorMsg";
 
 function RateDialog({ gameId, open, setOpen, setDetailed, liked, updateLists }) {
     const [currentRating, setCurrentRating] = useState(0)
+    const [error, setError] = useState(false)
     const indexes = [1, 2, 3, 4, 5]
     const gameContext = useContext(GamesContext)
     const userContext = useContext(UserContext)
@@ -25,6 +27,11 @@ function RateDialog({ gameId, open, setOpen, setDetailed, liked, updateLists }) 
 
     function handleCurrentRating(index) {
         setCurrentRating(index)
+    }
+
+    function handleError(error) {
+        setError(error)
+        setTimeout(() => setError(false), 3000)
     }
 
     function handleCancel() {
@@ -43,7 +50,6 @@ function RateDialog({ gameId, open, setOpen, setDetailed, liked, updateLists }) 
     }
 
     function handleNewRating() {
-        setOpen(false)
         const method = rating ? 'PATCH' : 'POST'
         const url = rating ? `/ratings/${ratingObj.id}` : '/ratings'
         const config = {
@@ -56,6 +62,7 @@ function RateDialog({ gameId, open, setOpen, setDetailed, liked, updateLists }) 
         fetch(url, config)
         .then(r => {
             if (r.ok) {
+                setOpen(false)
                 r.json().then(updatedRating => {
                     const rateListGame = {...updatedRating.game, rating: updatedRating.rating}
                     if (rating) {
@@ -67,6 +74,8 @@ function RateDialog({ gameId, open, setOpen, setDetailed, liked, updateLists }) 
                     userContext.setRateId({...userContext.ratedIds})
                     handleLists(updatedRating.game)
                 })
+            } else {
+                r.json().then(({ errors }) => handleError(errors[0]))
             }
         })
     }
@@ -90,6 +99,8 @@ function RateDialog({ gameId, open, setOpen, setDetailed, liked, updateLists }) 
                 <ButtonGroup>
                     {indexes.map(index => <RateStarBtn key={index} filled={index <= currentRating} index={index} handleRating={handleCurrentRating} />)}
                 </ButtonGroup>
+                <br/>
+                {error ? <ErrorMsg error={error} /> : null}
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleNewRating}>Save</Button>
