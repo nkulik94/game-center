@@ -42,8 +42,8 @@ function GameCardActions({ game, setDetailed = false }) {
         setTimeout(() => setError(''), 3000)
     }
 
-    function updateListForLikes(game, updatedGame) {
-        game.likes = game.id === updatedGame.id ? updatedGame.likes : game.likes
+    function updateListForAttribute(game, updatedGame, attribute) {
+        game[attribute] = game.id === updatedGame.id ? updatedGame[attribute] : game[attribute]
         return game
     }
 
@@ -69,11 +69,11 @@ function GameCardActions({ game, setDetailed = false }) {
                             setLiked(true)
                         }
                         if (rated) {
-                            setRateList(rateList.map(game => updateListForLikes(game, updatedGame)))
+                            setRateList(rateList.map(game => updateListForAttribute(game, updatedGame, 'likes')))
                         }
-                        setGames(allGames.map(game => updateListForLikes(game, updatedGame)))
+                        setGames(allGames.map(game => updateListForAttribute(game, updatedGame, 'likes')))
                         if (setDetailed) {
-                            setDetailed({...game, likes: updatedGame.likes})
+                            setDetailed('likes', updatedGame.likes)
                         }
                     })
                 } else {
@@ -106,11 +106,12 @@ function GameCardActions({ game, setDetailed = false }) {
                 {setDetailed ? null : <Button sx={{color: '#1e88e5'}} component={Link} to={`/game-details/${game.id}`}>More</Button>}
             </ButtonGroup>
             <RateDialog
-                rating={ratedIds[game.id] ? ratedIds[game.id] : 0}
+                gameId={game.id}
                 open={open}
                 setOpen={setOpen}
                 setDetailed={setDetailed}
                 liked={liked}
+                updateLists={updateListForAttribute}
             />
         </CardActions>
         </>

@@ -19,6 +19,10 @@ function DetailedGame() {
             .then(r => r.json())
             .then(setGame)
     }, [id])
+
+    function updateGame(attribute, value) {
+        setGame({...game, [attribute]: value})
+    }
     
     if (!game) return null
 
@@ -33,7 +37,7 @@ function DetailedGame() {
                     sx={{width: '80%', margin: 'auto'}}
                     />
                     <CardContent>
-                        <GameCardActions game={game} setDetailed={setGame} />
+                        <GameCardActions game={game} setDetailed={updateGame} />
                         <Box sx={{lineHeight: '2rem'}} >
                             <Typography variant="subtitle"><strong>Platform:</strong> {game.platform}</Typography>
                             <br/>

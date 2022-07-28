@@ -5,8 +5,8 @@ import IconButton from '@mui/material/IconButton';
 
 function RateStarBtn({ filled, index, handleRating }) {
     return (
-        <IconButton>
-            {filled ? <StarRateIcon onClick={() => handleRating(index)} sx={{color: 'yellow'}} /> : <StarOutlineIcon onClick={() => handleRating(index)} sx={{color: 'yellow'}} />}
+        <IconButton onClick={() => handleRating(index)} >
+            {filled ? <StarRateIcon sx={{color: 'yellow'}} /> : <StarOutlineIcon sx={{color: 'yellow'}} />}
         </IconButton>
     )
 }
