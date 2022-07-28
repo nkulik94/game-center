@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :ratings, except: [:index, :show]
-  resources :reviews
+  resources :reviews, except: [:show]
   resources :games, only: [:index, :show, :update]
   post "/signup", to: "users#create"
 
