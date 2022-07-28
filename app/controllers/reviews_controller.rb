@@ -14,6 +14,18 @@ class ReviewsController < ApplicationController
         end
     end
 
+    def update
+        review = Review.find(params[:id])
+        review.update(params[:content])
+        render json: review, status: :accepted
+    end
+
+    def destroy
+        review = Review.find(params[:id])
+        review.destroy
+        head :no_content
+    end
+
     private
 
     def review_params
