@@ -16,7 +16,7 @@ class GamesController < ApplicationController
         game = Game.find(params[:id])
         like = game.likes.find_by(user_id: session[:user_id])
         like ? like.destroy : game.likes.create(user_id: session[:user_id])
-        render json: game
+        render json: game, status: :accepted
     end
 
     private

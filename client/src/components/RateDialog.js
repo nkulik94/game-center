@@ -75,7 +75,7 @@ function RateDialog({ gameId, open, setOpen, setDetailed, liked, updateLists }) 
                     handleLists(updatedRating.game)
                 })
             } else {
-                r.json().then(({ errors }) => handleError(errors[0]))
+                r.json().then(({ error }) => Array.isArray(error) ? handleError(error[0]) : handleError(error))
             }
         })
     }

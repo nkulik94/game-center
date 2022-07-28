@@ -1,14 +1,11 @@
 class GameSerializer < ActiveModel::Serializer
-  attributes :id, :title, :thumbnail, :short_description, :likes, :rating
+  attributes :id, :title, :thumbnail, :short_description, :likes, :rating, :review_count
 
   def likes
     self.object.likes.count
   end
 
-  # def rating
-  #   if self.object.ratings.count > 0
-  #     average = self.object.ratings.average(:rating)
-  #     average.round(1)
-  #   end
-  # end
+  def review_count
+    self.object.reviews.count
+  end
 end

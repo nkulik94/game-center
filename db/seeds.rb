@@ -58,6 +58,8 @@ User.all.each do |user|
     rand(100..Game.count).times do
         user.likes.create(game_id: Game.all.sample.id)
         user.ratings.create(game_id: Game.all.sample.id, rating: rand(1..5))
+        rating = user.ratings.all.sample
+        user.reviews.create(rating_id: rating.id, game_id: rating.game_id, content: Faker::Lorem.sentences.join(' '))
         puts user.likes.count
     end
 end
@@ -65,18 +67,5 @@ end
 Game.all.each do |game|
     game.calculate_and_set_rating
 end
-
-# User.all.each do |user|
-#     100.times do
-#         game_id = rand(1..Game.count)
-#         game = Game.find_by(id: game_id)
-#         # doing this conditional for edge cases
-#         if game
-#             user_game = UserGame.find_or_create_by(user_id: user.id, game_id: game.id)
-#             user_game.generate_data
-#             puts user_game.liked
-#         end
-#     end
-# end
 
 puts "done seeding!"
