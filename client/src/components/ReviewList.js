@@ -14,7 +14,7 @@ function ReviewList({ reviews }) {
     useEffect(() => {
         setPageCount(Math.ceil(list.length / 8))
         setList(list.slice(0, 8))
-    }, [])
+    }, [reviews])
     return (
         <>
         <Paper sx={{color: '#e0e0e0', width: 'fit-content', margin: 'auto', padding: '2rem', backgroundColor: 'khaki'}}>

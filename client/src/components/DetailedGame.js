@@ -14,15 +14,23 @@ import ReviewList from "./ReviewList";
 function DetailedGame() {
     const id = useParams().gameId
     const [game, setGame] = useState(null)
+    const [reviews, setReviews] = useState([])
 
     useEffect(() => {
         fetch(`/games/${id}`)
             .then(r => r.json())
-            .then(setGame)
+            .then(game => {
+                setGame(game)
+                setReviews(game.reviews)
+            })
     }, [id])
 
     function updateGame(attribute, value) {
-        setGame({...game, [attribute]: value})
+        if (attribute === 'review-list') {
+            setReviews(reviews.filter(review => review.id !== value))
+        } else {
+            setGame({...game, [attribute]: value})
+        }
     }
     
     if (!game) return <div></div>
@@ -38,7 +46,7 @@ function DetailedGame() {
                     sx={{width: '80%', margin: 'auto'}}
                     />
                     <CardContent>
-                        <GameCardActions game={game} setDetailed={updateGame} />
+                        <GameCardActions game={game} setDetailed={updateGame} reviewList={reviews} />
                         <Box sx={{lineHeight: '2rem'}} >
                             <Typography variant="subtitle"><strong>Platform:</strong> {game.platform}</Typography>
                             <br/>
@@ -56,7 +64,7 @@ function DetailedGame() {
                         </Box>
                     </CardContent>
                 </Card>
-                <ReviewList reviews={game.reviews} />
+                <ReviewList reviews={reviews} />
             </Paper>
         </Container>
     )

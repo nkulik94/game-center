@@ -13,13 +13,15 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import ErrorMsg from "./ErrorMsg";
 import RateDialog from "./RateDialog";
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import ReviewDialog from "./ReviewDialog";
 
-function GameCardActions({ game, setDetailed = false }) {
+function GameCardActions({ game, setDetailed = false, reviewList = [] }) {
     const [error, setError] = useState('')
     const [liked, setLiked] = useState(false)
     const [rated, setRated] = useState(false)
     const [reviewed, setReviewed] = useState(false)
-    const [open, setOpen] = useState(false)
+    const [openRate, setOpenRate] = useState(false)
+    const [openReview, setOpenReview] = useState(false)
 
     const userContext = useContext(UserContext)
 
@@ -90,13 +92,17 @@ function GameCardActions({ game, setDetailed = false }) {
 
     const likeBtn = liked ? <FavoriteIcon sx={{color: 'red'}} onClick={handleLikes} /> : <FavoriteBorderIcon sx={{color: 'red'}} onClick={handleLikes} />
 
-    function handleOpen() {
-        setOpen(!open)
+    function handleOpenRate() {
+        setOpenRate(!openRate)
     }
 
-    const rateBtn = rated ? <StarRateIcon onClick={handleOpen} sx={{color: 'yellow'}} /> : <StarOutlineIcon onClick={handleOpen} sx={{color: 'yellow'}} />
+    function handleOpenReview() {
+        setOpenReview(!openReview)
+    }
 
-    const reviewBtn = reviewed ? <ChatBubbleIcon /> : <ChatBubbleOutlineIcon />
+    const rateBtn = rated ? <StarRateIcon onClick={handleOpenRate} sx={{color: 'yellow'}} /> : <StarOutlineIcon onClick={handleOpenRate} sx={{color: 'yellow'}} />
+
+    const reviewBtn = reviewed ? <ChatBubbleIcon onClick={handleOpenReview} /> : <ChatBubbleOutlineIcon onClick={handleOpenReview} />
 
     return (
         <>
@@ -110,18 +116,19 @@ function GameCardActions({ game, setDetailed = false }) {
                     {game.rating ? game.rating : 'N/A'}
                 </Button>
                 <Button startIcon={reviewBtn} >
-                    {setDetailed ? game.reviews.length : game.review_count}
+                    {setDetailed ? reviewList.length : game.review_count}
                 </Button>
                 {setDetailed ? null : <Button sx={{color: '#1e88e5'}} component={Link} to={`/game-details/${game.id}`}>More</Button>}
             </ButtonGroup>
             <RateDialog
                 gameId={game.id}
-                open={open}
-                setOpen={setOpen}
+                open={openRate}
+                setOpen={setOpenRate}
                 setDetailed={setDetailed}
                 liked={liked}
                 updateLists={updateListForAttribute}
             />
+            <ReviewDialog open={openReview} setOpen={setOpenReview} gameId={game.id} setDetailed={setDetailed} reviewList={reviewList} />
         </CardActions>
         </>
     )

@@ -8,11 +8,9 @@ function UserProvider({ children }) {
     const [likedIds, setId] = useState({})
     const [ratedGames, setRates] = useState([])
     const [ratedIds, setRateId] = useState({})
-    //const [reviewList, setReviewList] = useState([])
     const [reviewIds, setReviewId] = useState({})
 
     function setUpUser(user) {
-        console.log(user.reviews)
         const newProfile = {}
         Object.keys(user).forEach(key => {
             if (!Array.isArray(user[key])) {
@@ -34,7 +32,6 @@ function UserProvider({ children }) {
         setRates(ratedGamesArr)
         setRateId(rateIdObj)
         const reviewIdObj = {}
-        //setReviewList(user.reviews)
         user.reviews.map(review => reviewIdObj[review.game_id] = review)
         setReviewId(reviewIdObj)
     }
