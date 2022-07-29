@@ -8,7 +8,7 @@ function UserProvider({ children }) {
     const [likedIds, setId] = useState({})
     const [ratedGames, setRates] = useState([])
     const [ratedIds, setRateId] = useState({})
-    const [reviewList, setReviewList] = useState([])
+    //const [reviewList, setReviewList] = useState([])
     const [reviewIds, setReviewId] = useState({})
 
     function setUpUser(user) {
@@ -34,7 +34,7 @@ function UserProvider({ children }) {
         setRates(ratedGamesArr)
         setRateId(rateIdObj)
         const reviewIdObj = {}
-        setReviewList(user.reviews)
+        //setReviewList(user.reviews)
         user.reviews.map(review => reviewIdObj[review.game_id] = review)
         setReviewId(reviewIdObj)
     }
@@ -69,8 +69,6 @@ function UserProvider({ children }) {
         setRates,
         ratedIds,
         setRateId,
-        reviewList,
-        setReviewList,
         reviewIds,
         setReviewId
     }

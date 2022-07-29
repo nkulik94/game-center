@@ -19,7 +19,7 @@ function RateDialog({ gameId, open, setOpen, setDetailed, liked, updateLists }) 
     const rating = ratingObj ? ratingObj.rating : 0
     const ratedGameList = userContext.ratedGames
     const likeList = userContext.likedGames
-
+    const reviewed = userContext.reviewIds[gameId]
 
     useEffect(() => {
         setCurrentRating(rating)
@@ -43,6 +43,10 @@ function RateDialog({ gameId, open, setOpen, setDetailed, liked, updateLists }) 
         gameContext.setGames(gameContext.games.map(game => updateLists(game, updatedGame, 'rating')))
         if (liked) {
             userContext.setLikes(likeList.map(game => updateLists(game, updatedGame, 'rating')))
+        }
+        if (reviewed) {
+            reviewed.rating = currentRating
+            userContext.setReviewId({...userContext.reviewIds, [gameId]: reviewed})
         }
         if (setDetailed) {
             setDetailed('rating', updatedGame.rating)
@@ -105,7 +109,7 @@ function RateDialog({ gameId, open, setOpen, setDetailed, liked, updateLists }) 
             <DialogActions>
                 <Button onClick={handleNewRating}>Save</Button>
                 <Button onClick={handleCancel} >Cancel</Button>
-                {rating ? <Button color="error" onClick={handleDelete} >Delete</Button> : null}
+                {rating && !reviewed ? <Button color="error" onClick={handleDelete} >Delete</Button> : null}
             </DialogActions>
         </Dialog>
     )

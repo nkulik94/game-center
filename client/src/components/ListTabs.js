@@ -16,7 +16,7 @@ function ListTabs() {
     const userContext = useContext(UserContext)
     const likeList = userContext.likedGames
     const rateList = userContext.ratedGames
-    const reviewList = userContext.reviewList
+    const reviewList = userContext.reviewIds
 
     const filteredLikes = likeList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
     const filteredRates = rateList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
