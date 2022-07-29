@@ -34,7 +34,7 @@ function ListTabs() {
                 <GameList games={filteredLikes} isMainList={false} searched={searched} setSearched={setSearched} />
             </TabPanel>
             <TabPanel value='1'>
-            <GameList games={filteredRates} isMainList={false} searched={searched} setSearched={setSearched} />
+                <GameList games={filteredRates} isMainList={false} searched={searched} setSearched={setSearched} />
             </TabPanel>
             <TabPanel value='2'>
                 <ReviewList reviews={reviewList} />

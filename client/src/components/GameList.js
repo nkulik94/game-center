@@ -37,7 +37,7 @@ function GameList({ games, isMainList = true, searched, setSearched }) {
 
     if (!games) return null
 
-    const pageBtns = isMainList ? <LinkPageButtons pageCount={pageCount} currentPage={currentPage} /> : <SimplePageButtons setList={setList} games={games} count={pageCount} />
+    const pageBtns = isMainList ? <LinkPageButtons pageCount={pageCount} currentPage={currentPage} /> : <SimplePageButtons setList={setList} listItems={games} count={pageCount} />
     return (
         <Paper sx={{textAlign: 'center', color: '#e0e0e0'}}>
             <SearchBar searched={searched} setSearched={setSearched} />

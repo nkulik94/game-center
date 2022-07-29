@@ -1,4 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { Link } from 'react-router-dom'
 import { UserContext } from "../context/user";
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Card from '@mui/material/Card';
@@ -43,6 +44,8 @@ function UserReviewCard({ review }) {
             <CardActions>
                 <ButtonGroup>
                     <Button onClick={() => setOpenRate(true)} >Change Rating</Button>
+                    <Button>Edit/Delete Review</Button>
+                    <Button component={Link} to={`/game-details/${review.game_id}`}>View Game</Button>
                 </ButtonGroup>
             </CardActions>
             <RateDialog
