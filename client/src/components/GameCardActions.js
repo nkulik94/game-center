@@ -110,7 +110,7 @@ function GameCardActions({ game, setDetailed = false }) {
                     {game.rating ? game.rating : 'N/A'}
                 </Button>
                 <Button startIcon={reviewBtn} >
-                    {game.review_count}
+                    {setDetailed ? game.reviews.length : game.review_count}
                 </Button>
                 {setDetailed ? null : <Button sx={{color: '#1e88e5'}} component={Link} to={`/game-details/${game.id}`}>More</Button>}
             </ButtonGroup>

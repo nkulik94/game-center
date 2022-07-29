@@ -13,7 +13,6 @@ function UserProvider({ children }) {
 
     function setUpUser(user) {
         console.log(user.reviews)
-        setLikes(user.liked_games)
         const newProfile = {}
         Object.keys(user).forEach(key => {
             if (!Array.isArray(user[key])) {
@@ -21,6 +20,7 @@ function UserProvider({ children }) {
             }
         })
         setProfile(newProfile)
+        setLikes(user.liked_games)
         const likedIdObj = {}
         user.liked_games.map(game => likedIdObj[game.id] = game.id)
         setId(likedIdObj)

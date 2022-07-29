@@ -7,13 +7,16 @@ import TabContext from '@mui/lab/TabContext';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import GameList from "./GameList";
+import ReviewList from "./ReviewList";
 
 function ListTabs() {
     const [value, setValue] = useState('0')
     const [searched, setSearched] = useState('')
 
-    const likeList = useContext(UserContext).likedGames
-    const rateList = useContext(UserContext).ratedGames
+    const userContext = useContext(UserContext)
+    const likeList = userContext.likedGames
+    const rateList = userContext.ratedGames
+    const reviewList = userContext.reviewList
 
     const filteredLikes = likeList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
     const filteredRates = rateList.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
@@ -34,7 +37,7 @@ function ListTabs() {
             <GameList games={filteredRates} isMainList={false} searched={searched} setSearched={setSearched} />
             </TabPanel>
             <TabPanel value='2'>
-                dude
+                <ReviewList reviews={reviewList} />
             </TabPanel>
             </TabContext>
         </Box>

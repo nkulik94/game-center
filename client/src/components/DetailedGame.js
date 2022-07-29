@@ -10,7 +10,6 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import ReviewList from "./ReviewList";
-import { width } from "@mui/system";
 
 function DetailedGame() {
     const id = useParams().gameId
@@ -26,7 +25,7 @@ function DetailedGame() {
         setGame({...game, [attribute]: value})
     }
     
-    if (!game) return null
+    if (!game) return <div></div>
 
     return (
         <Container maxWidth="lg" sx={{marginTop: '3%'}}>

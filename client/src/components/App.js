@@ -1,7 +1,6 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { Route, Switch } from 'react-router-dom';
 import { UserContext } from "../context/user";
-import { GamesContext } from "../context/games";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import ProfilePage from "./ProfilePage";
@@ -12,12 +11,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import DetailedGame from "./DetailedGame";
 
 function App() {
-    //const [games, setGames] = useState([])
     const getMe = useContext(UserContext).getMe
-
-    // const games = useContext(GamesContext).games
-    // const setGames = useContext(GamesContext).setGames
-
 
     useEffect(getMe, [])
 

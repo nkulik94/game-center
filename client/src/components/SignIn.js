@@ -47,7 +47,10 @@ function SignIn() {
     fetch('/login', config)
     .then(res => {
       if (res.ok) {
-        res.json().then(setUpUser)
+        res.json().then(user => {
+          setUpUser(user)
+          history.goBack()
+        })
       } else {
         res.json().then(handleError)
       }
