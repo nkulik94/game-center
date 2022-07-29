@@ -10,10 +10,12 @@ import StarRateIcon from '@mui/icons-material/StarRate';
 import CardMedia from '@mui/material/CardMedia';
 import RateDialog from "./RateDialog";
 import Button from '@mui/material/Button';
+import ReviewDialog from "./ReviewDialog";
 
 function UserReviewCard({ review }) {
     const userContext = useContext(UserContext)
     const [openRate, setOpenRate] = useState(false)
+    const [openReview, setOpenReview] = useState(false)
     let stars = []
 
     for (let i = 0; i < review.rating; i++) {
@@ -35,7 +37,7 @@ function UserReviewCard({ review }) {
             component='img'
             image={review.thumbnail}
             />
-            <Typography variant="h6">Rating: {stars.map(star => <StarRateIcon sx={{color: 'yellow'}} key={star} />)}</Typography>
+            <Typography variant="h6">My Rating: {stars.map(star => <StarRateIcon sx={{color: 'yellow'}} key={star} />)}</Typography>
             <CardContent>
                 <Typography variant="body">
                     {review.content}
@@ -44,7 +46,7 @@ function UserReviewCard({ review }) {
             <CardActions>
                 <ButtonGroup>
                     <Button onClick={() => setOpenRate(true)} >Change Rating</Button>
-                    <Button>Edit/Delete Review</Button>
+                    <Button onClick={() => setOpenReview(true)}>Edit/Delete Review</Button>
                     <Button component={Link} to={`/game-details/${review.game_id}`}>View Game</Button>
                 </ButtonGroup>
             </CardActions>
@@ -54,6 +56,11 @@ function UserReviewCard({ review }) {
                 gameId={review.game_id}
                 updateLists={updateListForAttribute}
                 liked={userContext.likedIds[review.gameId]}
+            />
+            <ReviewDialog
+                open={openReview}
+                setOpen={setOpenReview}
+                gameId={review.game_id}
             />
         </Card>
     )

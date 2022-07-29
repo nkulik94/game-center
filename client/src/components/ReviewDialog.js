@@ -8,7 +8,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 
-function ReviewDialog({ open, setOpen, gameId, setDetailed = false, reviewList }) {
+function ReviewDialog({ open, setOpen, gameId, setDetailed = false }) {
     const userContext = useContext(UserContext)
     const gameContext = useContext(GamesContext)
     const review = userContext.reviewIds[gameId]
@@ -65,7 +65,7 @@ function ReviewDialog({ open, setOpen, gameId, setDetailed = false, reviewList }
             <DialogActions>
                 <Button>Save</Button>
                 <Button onClick={handleCancel} >Cancel</Button>
-                {review ? <Button onClick={handleDelete}>Delete Review</Button> : null}
+                {review ? <Button onClick={handleDelete} color='error'>Delete Review</Button> : null}
             </DialogActions>
         </Dialog>
     )
