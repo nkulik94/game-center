@@ -25,7 +25,7 @@ function SignIn() {
     password: ''
   })
 
-  if (user) history.goBack()
+  if (user) return <div></div>
 
   function handleForm(e) {
     e.preventDefault()

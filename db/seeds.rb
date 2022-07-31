@@ -18,7 +18,7 @@ end
 
 puts "creating users..."
 User.create(user_info) until User.count == 10
-User.create(first_name: "naftali", last_name: 'kulik', username: "nkulik", password: "nkulik", avatar_url: "https://drive.google.com/uc?export=view&id=12O1_1NbBDxe0KDwPkMHP897AlJVal0o4", bio: Faker::Lorem.sentences.join(' '))
+User.create(first_name: "Jackson", last_name: 'Lamar', username: "QB1", password: "ljera", avatar_url: Faker::Avatar.image, bio: Faker::Lorem.sentences.join(' '))
 
 puts "getting games..."
 
@@ -62,6 +62,7 @@ User.all.each do |user|
         user.reviews.create(rating_id: rating.id, game_id: rating.game_id, content: Faker::Lorem.sentences.join(' '))
         puts user.likes.count
     end
+    user.set_tier
 end
 
 Game.all.each do |game|

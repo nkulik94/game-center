@@ -14,7 +14,6 @@ import ReviewList from "./ReviewList";
 function DetailedGame() {
     const id = useParams().gameId
     const [game, setGame] = useState(null)
-    //const [reviews, setReviews] = useState([])
 
     function getGame(id) {
         fetch(`/games/${id}`)
