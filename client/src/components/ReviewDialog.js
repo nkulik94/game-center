@@ -7,16 +7,23 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import ErrorMsg from './ErrorMsg';
 
 function ReviewDialog({ open, setOpen, gameId, setDetailed = false }) {
     const userContext = useContext(UserContext)
     const gameContext = useContext(GamesContext)
     const review = userContext.reviewIds[gameId]
     const [reviewForm, setForm] = useState(review ? review.content : '')
+    const [error, setError] = useState(null)
 
     function handleCancel() {
         setOpen(false)
         setForm(review ? review.content : '')
+    }
+
+    function handleError(error) {
+        setError(error)
+        setTimeout(() => setError(error), 3000)
     }
 
     function handleChangeReviewCount(list, num) {
@@ -79,6 +86,10 @@ function ReviewDialog({ open, setOpen, gameId, setDetailed = false }) {
                             }
                         }
                     })
+                } else {
+                    r.json().then(({ error }) => {
+                        Array.isArray(error) ? handleError(error[0]) : handleError(error)
+                    })
                 }
             })
     }
@@ -99,6 +110,7 @@ function ReviewDialog({ open, setOpen, gameId, setDetailed = false }) {
                 onChange={e => setForm(e.target.value)}
                 />
             </DialogContent>
+            {error ? <ErrorMsg error={error} /> : null}
             <DialogActions>
                 <Button onClick={handleSave}>Save</Button>
                 <Button onClick={handleCancel} >Cancel</Button>
