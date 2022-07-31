@@ -14,28 +14,15 @@ import ReviewList from "./ReviewList";
 function DetailedGame() {
     const id = useParams().gameId
     const [game, setGame] = useState(null)
-    const [reviews, setReviews] = useState([])
+    //const [reviews, setReviews] = useState([])
 
     function getGame(id) {
         fetch(`/games/${id}`)
             .then(r => r.json())
-            .then(game => {
-                setGame(game)
-                setReviews(game.reviews)
-            })
+            .then(setGame)
     }
 
     useEffect(() => getGame(id), [id])
-
-    function updateGame(attribute, value, action = null) {
-        if (action && action !== 'add') {
-            action === 'delete' ? setReviews(reviews.filter(review => review.id !== value)) : setReviews(reviews.map(review => review.id === value.id ? value : review))
-        } else if (action === 'add') {
-            setReviews([...reviews, value])
-        } else {
-            setGame({...game, [attribute]: value})
-        }
-    }
     
     if (!game) return <div></div>
 
@@ -50,7 +37,7 @@ function DetailedGame() {
                     sx={{width: '80%', margin: 'auto'}}
                     />
                     <CardContent>
-                        <GameCardActions game={game} setDetailed={getGame} reviewList={reviews} />
+                        <GameCardActions game={game} setDetailed={getGame} reviewList={game.reviews} />
                         <Box sx={{lineHeight: '2rem'}} >
                             <Typography variant="subtitle"><strong>Platform:</strong> {game.platform}</Typography>
                             <br/>
@@ -68,7 +55,7 @@ function DetailedGame() {
                         </Box>
                     </CardContent>
                 </Card>
-                <ReviewList reviews={reviews} />
+                <ReviewList reviews={game.reviews} />
             </Paper>
         </Container>
     )

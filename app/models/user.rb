@@ -9,4 +9,18 @@ class User < ApplicationRecord
     validates :first_name, presence: true
     validates :last_name, presence: true
     validates :username, presence: true, uniqueness: true
+
+    def set_tier
+        review_count = reviews.count
+        tier = if review_count > 50
+            'Hall of Fame'
+        elsif review_count > 25
+            'All-Pro'
+        elsif review_count > 1
+            'Pro'
+        else
+            'Rookie'
+        end
+        update(tier: tier)
+    end
 end

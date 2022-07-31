@@ -18,6 +18,8 @@ function GameReviewCard({ review }) {
             <Typography variant="h5">{review.user_full_name}</Typography>
             <br/>
             <Typography variant="h6">@{review.user_username}</Typography>
+            <Typography variant="title">Tier: {review.user_tier}</Typography>
+            <br/>
             <br/>
             <Typography variant="h6">Rating: {stars.map(star => <StarRateIcon sx={{color: 'yellow'}} key={star} />)}</Typography>
             <CardContent>

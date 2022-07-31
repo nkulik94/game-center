@@ -8,7 +8,8 @@ class ReviewsController < ApplicationController
         rating = user.ratings.find_by(game_id: params[:game_id], user_id: user.id)
         if rating
             review = user.reviews.create!(game_id: params[:game_id], content: params[:content], rating_id: rating.id)
-            render json: review, status: :created, serializer: UpdateReviewSerializer
+            user.set_tier
+            render json: review, status: :created, serializer: UserReviewSerializer
         else
             render json: { error: "Please rate this game before leaving a review" }, status: :unprocessable_entity
         end
@@ -17,12 +18,14 @@ class ReviewsController < ApplicationController
     def update
         review = Review.find(params[:id])
         review.update(content: params[:content])
-        render json: review, status: :accepted, serializer: UpdateReviewSerializer
+        render json: review, status: :accepted, serializer: UserReviewSerializer
     end
 
     def destroy
         review = Review.find(params[:id])
+        user = review.user
         review.destroy
+        user.set_tier
         head :no_content
     end
 
