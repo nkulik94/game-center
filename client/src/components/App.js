@@ -10,6 +10,7 @@ import Home from "./Home";
 import CssBaseline from '@mui/material/CssBaseline';
 import DetailedGame from "./DetailedGame";
 import UserList from "./UserList";
+import Contact from "./Contact";
 
 function App() {
     const getMe = useContext(UserContext).getMe
@@ -29,6 +30,9 @@ function App() {
                 </Route>
                 <Route path="/user-list">
                     <UserList />
+                </Route>
+                <Route path='/contact'>
+                    <Contact />
                 </Route>
                 <Route path='/game-details/:gameId'>
                     <DetailedGame />
