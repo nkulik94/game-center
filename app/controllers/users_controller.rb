@@ -19,7 +19,13 @@ class UsersController < ApplicationController
     def update
         user = User.find(params[:id])
         user.update!(user_params)
-        render json: user, include: ['liked_games', 'ratings', 'ratings.game', 'reviews']
+        render json: user, include: ['liked_games', 'ratings', 'ratings.game', 'reviews'], status: :accepted
+    end
+
+    def destroy
+        user = User.find(params[:id])
+        user.destroy
+        head :no_content
     end
 
     private
