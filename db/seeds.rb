@@ -62,8 +62,9 @@ User.all.each do |user|
         user.reviews.create(rating_id: rating.id, game_id: rating.game_id, content: Faker::Lorem.sentences.join(' '))
         puts user.likes.count
     end
-    user.set_tier
 end
+
+User.all.each { |user| user.set_tier }
 
 Game.all.each do |game|
     game.calculate_and_set_rating

@@ -44,9 +44,9 @@ function ReviewDialog({ open, setOpen, gameId, setDetailed = false }) {
                 delete idsObj[gameId]
                 userContext.setReviewId({...idsObj})
                 gameContext.setGames(handleChangeReviewCount(gameContext.games, -1))
-                userContext.setRates(handleChangeReviewCount(gameContext.games, -1))
+                userContext.setRates(handleChangeReviewCount(userContext.ratedGames, -1))
                 if (userContext.likedIds[gameId]) {
-                    userContext.setLikes(handleChangeReviewCount(gameContext.games, -1))
+                    userContext.setLikes(handleChangeReviewCount(userContext.likedGames, -1))
                 }
                 if (setDetailed) {
                     setDetailed(gameId)
@@ -75,9 +75,9 @@ function ReviewDialog({ open, setOpen, gameId, setDetailed = false }) {
                         userContext.setReviewId({...idsObj})
                         if (method === 'POST') {
                             gameContext.setGames(handleChangeReviewCount(gameContext.games, 1))
-                            userContext.setRates(handleChangeReviewCount(gameContext.games, 1))
+                            userContext.setRates(handleChangeReviewCount(userContext.ratedGames, 1))
                             if (userContext.likedIds[gameId]) {
-                                userContext.setLikes(handleChangeReviewCount(gameContext.games, 1))
+                                userContext.setLikes(handleChangeReviewCount(userContext.likedGames, 1))
                             }
                         }
                         if (setDetailed) {

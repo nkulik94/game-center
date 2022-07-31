@@ -37,7 +37,7 @@ function Home() {
             <Paper sx={{textAlign: 'center', color: '#e0e0e0', padding: 5}}>
                 <Typography variant="h2">Gamer Spot</Typography>
                 <Typography variant="h6" >All game information obtained via the <Link href='https://www.freetogame.com/api-doc'>Freetogame</Link> API</Typography>
-                <Typography variant="body">Welcome to Gamer Spot! Here users can browse free online games, as well as like, rate, or review them. This website was developed as a software engineering project. Feel free to browse around, but keep in mind that most of the users and their associated information (likes, reviews, ratings) have been randomly generated and are essentially meaningless. To fully explore the site, click on the button below to be logged in as an existing user.</Typography>
+                <Typography variant="body">Welcome to Gamer Spot! Here users can browse free online games, as well as like, rate, or review them. This website was developed as a software engineering project. Feel free to browse around, but keep in mind that most of the users and their associated information (likes, reviews, ratings) have been randomly generated and are essentially meaningless. To fully explore the site, click on the button below to be logged in as an existing user. (Give it a second, it's not as as fast as I'd like it to be)</Typography>
                 <br/>
                 {isLoggedIn ? <Typography variant="title">You are logged in!</Typography> : <Button variant='outlined' onClick={handleLogIn}>Log In As Dummy User</Button>}
             </Paper>
