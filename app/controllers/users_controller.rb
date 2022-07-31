@@ -2,6 +2,10 @@ class UsersController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
+    def index
+        render json: User.all, each_serializer: UserListSerializer
+    end
+
     def create
         user = User.create!(user_params)
         session[:user_id] = user.id

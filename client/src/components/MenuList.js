@@ -7,7 +7,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 
 function MenuList({ onClickList }) {
-    const options = ["Home", "About", "Games", "Contact"]
+    const options = ["Home", "Games", "Users", "Contact"]
 
     return (
         <Box
