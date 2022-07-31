@@ -1,5 +1,5 @@
 class UpdateReviewSerializer < ActiveModel::Serializer
-  attributes :id, :game_id, :user_id, :content, :game, :rating, :thumbnail, :user_full_name, :user_username
+  attributes :id, :game_id, :user_id, :content, :game, :rating, :thumbnail, :user_full_name, :user_username, :user_avatar
 
   def game
     self.object.game.title
@@ -19,5 +19,9 @@ class UpdateReviewSerializer < ActiveModel::Serializer
 
   def user_username
     self.object.user.username
+  end
+
+  def user_avatar
+    self.object.user.avatar_url
   end
 end
