@@ -19,31 +19,68 @@ function ReviewDialog({ open, setOpen, gameId, setDetailed = false }) {
         setForm(review ? review.content : '')
     }
 
+    function handleChangeReviewCount(list, num) {
+        return list.map(game => {
+            game.review_count = game.id === gameId ? game.review_count + num : game.review_count
+            return game
+        })
+    }
+
     function handleDelete() {
         const id = review.id
-        setOpen(false)
         fetch(`/reviews/${id}`, {method: 'DELETE'})
         .then(r => {
             if (r.ok) {
+                setOpen(false)
+                setForm('')
                 const idsObj = userContext.reviewIds
                 delete idsObj[gameId]
                 userContext.setReviewId({...idsObj})
-                function handleLessReview(list) {
-                    return list.map(game => {
-                        game.review_count = game.id === gameId ? game.review_count - 1 : game.review_count
-                        return game
-                    })
-                }
-                gameContext.setGames(handleLessReview(gameContext.games))
-                userContext.setRates(handleLessReview(userContext.ratedGames))
+                gameContext.setGames(handleChangeReviewCount(gameContext.games, -1))
+                userContext.setRates(handleChangeReviewCount(gameContext.games, -1))
                 if (userContext.likedIds[gameId]) {
-                    userContext.setLikes(handleLessReview(userContext.likedGames))
+                    userContext.setLikes(handleChangeReviewCount(gameContext.games, -1))
                 }
                 if (setDetailed) {
-                    setDetailed('review-list', id)
+                    setDetailed('review-list', id, 'delete')
                 }
             }
         })
+    }
+
+    function handleSave() {
+        const method = review ? 'PATCH' : 'POST'
+        const url = review ? `/reviews/${review.id}` : '/reviews'
+        const config = {
+            method: method,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({game_id: gameId, content: reviewForm})
+        }
+        fetch(url, config)
+            .then(r => {
+                if (r.ok) {
+                    setOpen(false)
+                    r.json().then(review => {
+                        const idsObj = userContext.reviewIds
+                        idsObj[gameId] = review
+                        userContext.setReviewId({...idsObj})
+                        if (method === 'PATCH' && setDetailed) {
+                            setDetailed('review-list', review, 'update')
+                        } else if (method === 'POST') {
+                            gameContext.setGames(handleChangeReviewCount(gameContext.games, 1))
+                            userContext.setRates(handleChangeReviewCount(gameContext.games, 1))
+                            if (userContext.likedIds[gameId]) {
+                                userContext.setLikes(handleChangeReviewCount(gameContext.games, 1))
+                            }
+                            if (setDetailed) {
+                                setDetailed('review-list', review, 'add')
+                            }
+                        }
+                    })
+                }
+            })
     }
 
     return (
@@ -63,7 +100,7 @@ function ReviewDialog({ open, setOpen, gameId, setDetailed = false }) {
                 />
             </DialogContent>
             <DialogActions>
-                <Button>Save</Button>
+                <Button onClick={handleSave}>Save</Button>
                 <Button onClick={handleCancel} >Cancel</Button>
                 {review ? <Button onClick={handleDelete} color='error'>Delete Review</Button> : null}
             </DialogActions>

@@ -2,7 +2,6 @@ import React from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import CardHeader from '@mui/material/CardHeader';
 import StarRateIcon from '@mui/icons-material/StarRate';
 
 function GameReviewCard({ review }) {

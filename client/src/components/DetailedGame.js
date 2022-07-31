@@ -25,9 +25,11 @@ function DetailedGame() {
             })
     }, [id])
 
-    function updateGame(attribute, value) {
-        if (attribute === 'review-list') {
-            setReviews(reviews.filter(review => review.id !== value))
+    function updateGame(attribute, value, action = null) {
+        if (action && action !== 'add') {
+            action === 'delete' ? setReviews(reviews.filter(review => review.id !== value)) : setReviews(reviews.map(review => review.id === value.id ? value : review))
+        } else if (action === 'add') {
+            setReviews([...reviews, value])
         } else {
             setGame({...game, [attribute]: value})
         }
