@@ -49,7 +49,7 @@ function RateDialog({ gameId, open, setOpen, setDetailed, liked, updateLists }) 
             userContext.setReviewId({...userContext.reviewIds, [gameId]: reviewed})
         }
         if (setDetailed) {
-            setDetailed('rating', updatedGame.rating)
+            setDetailed(updatedGame.id)
         }
     }
 

@@ -81,7 +81,7 @@ function GameCardActions({ game, setDetailed = false, reviewList = [] }) {
                         }
                         setGames(allGames.map(game => updateListForAttribute(game, updatedGame, 'likes')))
                         if (setDetailed) {
-                            setDetailed('likes', updatedGame.likes)
+                            setDetailed(updatedGame.id)
                         }
                     })
                 } else {

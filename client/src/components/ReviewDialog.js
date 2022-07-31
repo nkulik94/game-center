@@ -49,7 +49,7 @@ function ReviewDialog({ open, setOpen, gameId, setDetailed = false }) {
                     userContext.setLikes(handleChangeReviewCount(gameContext.games, -1))
                 }
                 if (setDetailed) {
-                    setDetailed('review-list', id, 'delete')
+                    setDetailed(gameId)
                 }
             }
         })
@@ -73,17 +73,15 @@ function ReviewDialog({ open, setOpen, gameId, setDetailed = false }) {
                         const idsObj = userContext.reviewIds
                         idsObj[gameId] = review
                         userContext.setReviewId({...idsObj})
-                        if (method === 'PATCH' && setDetailed) {
-                            setDetailed('review-list', review, 'update')
-                        } else if (method === 'POST') {
+                        if (method === 'POST') {
                             gameContext.setGames(handleChangeReviewCount(gameContext.games, 1))
                             userContext.setRates(handleChangeReviewCount(gameContext.games, 1))
                             if (userContext.likedIds[gameId]) {
                                 userContext.setLikes(handleChangeReviewCount(gameContext.games, 1))
                             }
-                            if (setDetailed) {
-                                setDetailed('review-list', review, 'add')
-                            }
+                        }
+                        if (setDetailed) {
+                            setDetailed(gameId)
                         }
                     })
                 } else {

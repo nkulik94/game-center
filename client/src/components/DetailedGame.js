@@ -16,14 +16,16 @@ function DetailedGame() {
     const [game, setGame] = useState(null)
     const [reviews, setReviews] = useState([])
 
-    useEffect(() => {
+    function getGame(id) {
         fetch(`/games/${id}`)
             .then(r => r.json())
             .then(game => {
                 setGame(game)
                 setReviews(game.reviews)
             })
-    }, [id])
+    }
+
+    useEffect(() => getGame(id), [id])
 
     function updateGame(attribute, value, action = null) {
         if (action && action !== 'add') {
@@ -48,7 +50,7 @@ function DetailedGame() {
                     sx={{width: '80%', margin: 'auto'}}
                     />
                     <CardContent>
-                        <GameCardActions game={game} setDetailed={updateGame} reviewList={reviews} />
+                        <GameCardActions game={game} setDetailed={getGame} reviewList={reviews} />
                         <Box sx={{lineHeight: '2rem'}} >
                             <Typography variant="subtitle"><strong>Platform:</strong> {game.platform}</Typography>
                             <br/>
