@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
+import DeleteAccount from "./DeleteAccount";
 import { lightBlue } from '@mui/material/colors';
 
 function ProfileMenu({ avatar }) {
@@ -51,6 +52,9 @@ function ProfileMenu({ avatar }) {
                         }}
                     >
                         Sign Out
+                    </MenuItem>
+                    <MenuItem>
+                        <DeleteAccount />
                     </MenuItem>
               </Menu>
         </>
