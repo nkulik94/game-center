@@ -6,4 +6,5 @@ class DetailedGameSerializer < ActiveModel::Serializer
   end
 
   has_many :reviews
+  has_many :liking_users, serializer: UserListSerializer
 end

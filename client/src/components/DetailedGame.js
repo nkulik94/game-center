@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import ReviewList from "./ReviewList";
+import GameTabs from "./GameTabs";
 
 function DetailedGame() {
     const id = useParams().gameId
@@ -54,7 +55,8 @@ function DetailedGame() {
                         </Box>
                     </CardContent>
                 </Card>
-                <ReviewList reviews={game.reviews} />
+                {/* <ReviewList reviews={game.reviews} /> */}
+                <GameTabs game={game}/>
             </Paper>
         </Container>
     )

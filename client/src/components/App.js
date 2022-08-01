@@ -9,7 +9,7 @@ import GamePage from "./GamePage";
 import Home from "./Home";
 import CssBaseline from '@mui/material/CssBaseline';
 import DetailedGame from "./DetailedGame";
-import UserList from "./UserList";
+import UserPage from "./UserPage";
 import Contact from "./Contact";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
                     <GamePage />
                 </Route>
                 <Route path="/user-list">
-                    <UserList />
+                    <UserPage />
                 </Route>
                 <Route path='/contact'>
                     <Contact />
