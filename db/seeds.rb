@@ -17,7 +17,7 @@ def user_info
 end
 
 puts "creating users..."
-user = User.create(user_info) until User.count = 20
+user = User.create(user_info) until User.count == 20
 User.create(first_name: "Jackson", last_name: 'Lamar', username: "QB1", password: "ljera", avatar_url: Faker::Avatar.image, bio: Faker::Lorem.sentences.join(' '))
 
 puts "getting games..."
