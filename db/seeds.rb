@@ -17,7 +17,7 @@ def user_info
 end
 
 puts "creating users..."
-User.create(user_info) until User.count == 10
+User.create(user_info) until User.count == 100
 User.create(first_name: "Jackson", last_name: 'Lamar', username: "QB1", password: "ljera", avatar_url: Faker::Avatar.image, bio: Faker::Lorem.sentences.join(' '))
 
 puts "getting games..."
@@ -55,7 +55,7 @@ end
 puts "creating ratings"
 
 User.all.each do |user|
-    rand(100..Game.count).times do
+    rand(10..Game.count).times do
         user.likes.create(game_id: Game.all.sample.id)
         user.ratings.create(game_id: Game.all.sample.id, rating: rand(1..5))
         rating = user.ratings.all.sample
