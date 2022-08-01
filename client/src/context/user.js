@@ -42,6 +42,7 @@ function UserProvider({ children }) {
         setId({})
         setRates([])
         setRateId({})
+        setReviewId({})
     }
 
     function getMe() {
