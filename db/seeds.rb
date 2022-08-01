@@ -17,7 +17,10 @@ def user_info
 end
 
 puts "creating users..."
-User.create(user_info) until User.count == 100
+100.times do 
+    user = User.create(user_info)
+    puts user.username
+end
 User.create(first_name: "Jackson", last_name: 'Lamar', username: "QB1", password: "ljera", avatar_url: Faker::Avatar.image, bio: Faker::Lorem.sentences.join(' '))
 
 puts "getting games..."

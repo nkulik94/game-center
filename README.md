@@ -62,4 +62,9 @@ The database uses five models, `User`, `Game`, `Like`, `Rating`, and `Review`. T
 
 The user information is saved to state on login, with a separate state for profile information, ratings, reviews, and likes. These states and their setter functions are all available throughout the app via context. User actions such as rating or reviewing games update all of the necessary states accordingly, a long and occasionally tedious process that quite possibly could have been done better. The game list and setter function are also available via context. The user context also contains objects with the game ids of the user's liked, rated, and reviewed games as keys. This allows the game list to easily access this information and display the icons differently. (For example, a game that has been liked by the current user will display a filled heart icon, and one which has not will display only an outline.)
 
-The frontend uses react-router-dom for client-side routing
+The frontend uses react-router-dom for client-side routing, and has routes for a home page, game list page, user list page, and contact page. Additionally there are routes for a detailed game rendering (using route params), and for signup, login, and profile pages.
+
+This is it, the most comprehensive project I've developed to date! For any questions or comments, feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/naftali-kulik-se/) or email me at [naftalikulikse@gmail.com](mailto:naftalikulikse@gmail.com).
+
+Thanks for checking it out,  
+Naftali Kulik
