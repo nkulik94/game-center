@@ -1,5 +1,5 @@
 class ReviewSerializer < ActiveModel::Serializer
-  attributes :id, :game_id, :user_id, :content, :rating, :user_full_name, :user_username, :user_avatar, :user_tier
+  attributes :id, :content, :rating, :user_full_name, :user_username, :user_avatar, :user_tier
 
   def rating
     self.object.rating.rating

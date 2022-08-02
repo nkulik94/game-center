@@ -55,7 +55,6 @@ function DetailedGame() {
                         </Box>
                     </CardContent>
                 </Card>
-                {/* <ReviewList reviews={game.reviews} /> */}
                 <GameTabs game={game}/>
             </Paper>
         </Container>
