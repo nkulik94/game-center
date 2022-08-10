@@ -9,7 +9,6 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
-import ReviewList from "./ReviewList";
 import GameTabs from "./GameTabs";
 
 function DetailedGame() {

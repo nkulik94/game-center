@@ -31,6 +31,8 @@ function MenuList({ onClickList }) {
                         case "Contact":
                             link = "/contact"
                             break;
+                        default:
+                            link = null
                     }
                     return (
                         <ListItem key={option} disablePadding>
