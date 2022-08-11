@@ -28,8 +28,12 @@ class UsersController < ApplicationController
 
     def destroy
         user = User.find(params[:id])
-        user.destroy
-        head :no_content
+        if user.username == 'QB1'
+            render json: { error: 'Please do not delete the demo user'}, status: :unauthorized
+        else
+            user.destroy
+            head :no_content
+        end
     end
 
     private
