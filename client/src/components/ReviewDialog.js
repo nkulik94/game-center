@@ -23,7 +23,7 @@ function ReviewDialog({ open, setOpen, gameId, setDetailed = false }) {
 
     function handleError(error) {
         setError(error)
-        setTimeout(() => setError(error), 3000)
+        setTimeout(() => setError(null), 3000)
     }
 
     function handleChangeReviewCount(list, num) {
