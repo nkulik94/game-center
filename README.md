@@ -22,7 +22,7 @@ The database uses five models, `User`, `Game`, `Like`, `Rating`, and `Review`. T
 
 ### User Routes
 
-`get /login` - handled by the show action in the sessions controller. Takes login credentials as params and upon authentication saves the user id to the `sessions` hash and sends the user information back in json format.
+`post /login` - handled by the show action in the sessions controller. Takes login credentials as params and upon authentication saves the user id to the `sessions` hash and sends the user information back in json format.
 
 `delete /logout` - handled by the destroy action in the sessions controller. Removes the user id from the `sessions` hash to log the user out.
 
