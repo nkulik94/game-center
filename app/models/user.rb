@@ -23,4 +23,11 @@ class User < ApplicationRecord
         end
         update(tier: tier)
     end
+
+    def get_list list_name
+        list = self.likes if list_name == 'likes'
+        list = self.ratings if list_name == 'ratings'
+        list = self.reviews if list_name == 'ratings'
+        list
+    end
 end
