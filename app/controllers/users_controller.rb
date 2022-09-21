@@ -20,6 +20,12 @@ class UsersController < ApplicationController
         end
     end
 
+    def list
+        user = User.last
+        list = user.get_list(params[:list])
+        render json: list
+    end
+
     def update
         user = User.find(params[:id])
         user.update!(user_params)
