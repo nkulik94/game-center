@@ -7,11 +7,11 @@ import LinkPageButtons from "./LinkPageButtons";
 import SimplePageButtons from "./SimplePageButtons";
 import SearchBar from "./SearchBar";
 
-function GameList({ games, isMainList = true, searched, setSearched }) {
+function GameList({ games, isMainList = true, searched, setSearched, params }) {
     const [pageCount, setPageCount] = useState(0)
     const [currentPage, setPage] = useState(1)
     const [listedGames, setList] = useState([])
-    const params = useParams()
+    //const params = useParams()
 
     const list = params.list ? params.list : 'game-list'
 

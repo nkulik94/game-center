@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useParams } from "react-router-dom";
 import { UserContext } from "../context/user";
 import TabList from '@mui/lab/TabList';
 import Tab from '@mui/material/Tab';
@@ -11,6 +12,7 @@ import ReviewList from "./ReviewList";
 function ListTabs() {
     const [value, setValue] = useState('0')
     const [searched, setSearched] = useState('')
+    const params = useParams()
 
     const userContext = useContext(UserContext)
     const likeList = userContext.likedGames
@@ -30,10 +32,10 @@ function ListTabs() {
                     </TabList>
                 </Box>
                 <TabPanel value='0'>
-                    <GameList games={filteredLikes} isMainList={false} searched={searched} setSearched={setSearched} />
+                    <GameList games={filteredLikes} isMainList={false} searched={searched} setSearched={setSearched} params={params} />
                 </TabPanel>
                 <TabPanel value='1'>
-                    <GameList games={filteredRates} isMainList={false} searched={searched} setSearched={setSearched} />
+                    <GameList games={filteredRates} isMainList={false} searched={searched} setSearched={setSearched} params={params}  />
                 </TabPanel>
                 <TabPanel value='2'>
                     <ReviewList reviews={reviewList} />
