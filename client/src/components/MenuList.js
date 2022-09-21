@@ -7,7 +7,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 
 function MenuList({ onClickList }) {
-    const options = ["Home", "Games", "Users", "Contact"]
+    const options = [{name: 'Home', link: '/'}, {name: "Games", link: '/game-list/1'}, {name: 'Users', link: '/user-list'}, {name: 'Contact', link: '/contact'}]
 
     return (
         <Box
@@ -17,27 +17,10 @@ function MenuList({ onClickList }) {
         >
             <List>
                 {options.map(option => {
-                    let link
-                    switch (option) {
-                        case 'Home':
-                            link = "/";
-                            break;
-                        case "Games":
-                            link ="/game-list/1";
-                            break;
-                        case "Users":
-                            link = "/user-list";
-                            break;
-                        case "Contact":
-                            link = "/contact"
-                            break;
-                        default:
-                            link = null
-                    }
                     return (
-                        <ListItem key={option} disablePadding>
-                            <ListItemButton component={Link} to={link} >
-                                <ListItemText primary={option} />
+                        <ListItem key={option.name} disablePadding>
+                            <ListItemButton component={Link} to={option.link} >
+                                <ListItemText primary={option.name} />
                             </ListItemButton>
                         </ListItem>
                     )

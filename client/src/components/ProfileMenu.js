@@ -44,7 +44,7 @@ function ProfileMenu({ avatar }) {
                 open={Boolean(anchor)}
                 onClose={() => setAnchor(null)}
               >
-                <MenuItem component={Link} to="/profile" onClick={() => setAnchor(null)}>Profile</MenuItem>
+                <MenuItem component={Link} to="/profile/likes/1" onClick={() => setAnchor(null)}>Profile</MenuItem>
                 <MenuItem
                     onClick={() => {
                         setAnchor(null)

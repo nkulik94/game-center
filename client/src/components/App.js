@@ -37,7 +37,7 @@ function App() {
                 <Route path='/game-details/:gameId'>
                     <DetailedGame />
                 </Route>
-                <Route path="/profile">
+                <Route path="/profile/:list/:page">
                     <ProfilePage />
                 </Route>
                 <Route path="/sign-in">
