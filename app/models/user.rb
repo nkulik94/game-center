@@ -26,7 +26,7 @@ class User < ApplicationRecord
 
     def get_list list_name
         list = self.liked_games if list_name == 'likes'
-        list = self.ratings if list_name == 'ratings'
+        list = self.rated_games if list_name == 'ratings'
         list = self.reviews if list_name == 'reviews'
         list
     end
