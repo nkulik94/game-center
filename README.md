@@ -68,3 +68,5 @@ This is it, the most comprehensive project I've developed to date! For any quest
 
 Thanks for checking it out,  
 Naftali Kulik
+
+I am currently working on a new branch, `refactor`, to try to optimize and clean up the code.
