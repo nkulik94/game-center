@@ -2,7 +2,7 @@
 
 ## How to run this app
 
-To run the app locally, you will need to have Postgres installed. To make sure the postgres service is running, run `sudo service postgresql start`. To run the app, run `rails s` to start the server, and `npm start --prefix client` to open the app in the browser. Run `rails db:migrate` to run the migrations, and `rails db:seed` to seed the database. Additionally, the app is deployed [here](https://gamer-spot.herokuapp.com/).
+To run the app locally, you will need to have Postgres installed. To make sure the postgres service is running, run `sudo service postgresql start`. Then you will have to run `bundle install` and `npm install --prefix client` to install the dependancies. To run the app, run `rails s` to start the server, and `npm start --prefix client` to open the app in the browser. Run `rails db:migrate` to run the migrations, and `rails db:seed` to seed the database. Additionally, the app is deployed [here](https://gamer-spot.herokuapp.com/).
 
 ## What it is
 
@@ -69,4 +69,4 @@ This is it, the most comprehensive project I've developed to date! For any quest
 Thanks for checking it out,  
 Naftali Kulik
 
-I am currently working on a new branch, `refactor`, to try to optimize and clean up the code.
+I am currently working on a new branch, `refactor`, to try optimizing and cleaning up the code.
