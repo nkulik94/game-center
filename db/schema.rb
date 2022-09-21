@@ -10,11 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_28_194752) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_07_28_194752) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "timescaledb"
 
   create_table "games", force: :cascade do |t|
     t.string "title"
@@ -26,8 +24,8 @@ ActiveRecord::Schema.define(version: 2022_07_28_194752) do
     t.string "publisher"
     t.string "developer"
     t.string "release_date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "description"
     t.integer "ftg_id"
     t.decimal "rating"
@@ -36,24 +34,24 @@ ActiveRecord::Schema.define(version: 2022_07_28_194752) do
   create_table "likes", force: :cascade do |t|
     t.integer "game_id"
     t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "ratings", force: :cascade do |t|
     t.integer "game_id"
     t.integer "user_id"
     t.integer "rating"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reviews", force: :cascade do |t|
     t.integer "game_id"
     t.integer "user_id"
     t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "rating_id"
   end
 
@@ -63,8 +61,8 @@ ActiveRecord::Schema.define(version: 2022_07_28_194752) do
     t.string "password_digest"
     t.string "bio"
     t.string "tier", default: "Rookie"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "avatar_url"
     t.string "last_name"
   end
