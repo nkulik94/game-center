@@ -13,6 +13,8 @@ function GameList({ games, isMainList = true, searched, setSearched }) {
     const [listedGames, setList] = useState([])
     const params = useParams()
 
+    const list = params.list ? params.list : 'game-list'
+
     let pageNum
     let start
     let end
@@ -37,7 +39,7 @@ function GameList({ games, isMainList = true, searched, setSearched }) {
 
     if (!games) return null
 
-    const pageBtns = isMainList ? <LinkPageButtons pageCount={pageCount} currentPage={currentPage} /> : <SimplePageButtons setList={setList} listItems={games} count={pageCount} />
+    const pageBtns = isMainList ? <LinkPageButtons pageCount={pageCount} currentPage={currentPage} params={list} /> : <SimplePageButtons setList={setList} listItems={games} count={pageCount} />
     return (
         <Paper sx={{textAlign: 'center', color: '#e0e0e0'}}>
             <SearchBar searched={searched} setSearched={setSearched} />
