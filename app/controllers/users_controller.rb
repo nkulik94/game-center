@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
     def list
         user = User.last
-        list = user.get_list(params[:list])
+        list = user.get_list(params[:list], params[:page])
         render json: list
     end
 

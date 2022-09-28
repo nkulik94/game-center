@@ -24,10 +24,11 @@ class User < ApplicationRecord
         update(tier: tier)
     end
 
-    def get_list list_name
-        list = self.liked_games if list_name == 'likes'
-        list = self.rated_games if list_name == 'ratings'
-        list = self.reviews if list_name == 'reviews'
+    def get_list list_name, page
+        offset = (page ? page.to_i - 1 : 0) * 18
+        list = self.liked_games.offset(offset).limit(18) if list_name == 'likes'
+        list = self.rated_games.offset(offset).limit(18) if list_name == 'ratings'
+        list = self.reviews.offset(offset).limit(18) if list_name == 'reviews'
         list
     end
 end
