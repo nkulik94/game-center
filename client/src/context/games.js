@@ -10,8 +10,7 @@ function GamesProvider({ children }) {
         games,
         setGames
     }
-    console.log(games[0])
-
+    
     return <GamesContext.Provider value={gamesObj}>{children}</GamesContext.Provider>;
 }
 

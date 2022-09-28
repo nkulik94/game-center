@@ -23,4 +23,16 @@ class Game < ApplicationRecord
         pages += 1 unless pages * 18 == Game.count
         pages
     end
+
+    def serialize
+        serialized_game = ActiveModelSerializers::Adapter::Json.new(
+        GameSerializer.new(self)
+        ).serializable_hash
+        serialized_game[:game]
+    end
+
+    def self.serialize_group games
+        serialized_games = games.map { |game| game.serialize }
+        serialized_games
+    end
 end
