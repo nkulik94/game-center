@@ -4,20 +4,13 @@ const GamesContext = React.createContext()
 
 function GamesProvider({ children }) {
     const [games, setGames] = useState([])
-
-    function getAndSetGames() {
-        fetch('/games')
-            .then(r => r.json())
-            .then(setGames)
-    }
-
-    useEffect(getAndSetGames, [])
+    const [pageCount, setPageCount] = useState(0)
 
     const gamesObj = {
         games,
-        setGames,
-        getAndSetGames
+        setGames
     }
+    console.log(games[0])
 
     return <GamesContext.Provider value={gamesObj}>{children}</GamesContext.Provider>;
 }
