@@ -17,4 +17,10 @@ class Game < ApplicationRecord
             self.update(rating: rating)
         end
     end
+
+    def self.page_count
+        pages = Game.count / 18
+        pages += 1 unless pages * 18 == Game.count
+        pages
+    end
 end

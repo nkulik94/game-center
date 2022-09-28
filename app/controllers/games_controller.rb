@@ -4,7 +4,8 @@ class GamesController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
     def index
-        render json: Game.all
+        offset = (params[:page] ? params[:page].to_i - 1 : 0) * 18
+        render json: { page_count: Game.page_count, games: Game.offset(offset).limit(18) }
     end
 
     def show
