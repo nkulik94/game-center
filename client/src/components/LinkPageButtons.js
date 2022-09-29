@@ -4,7 +4,7 @@ import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
 
-function LinkPageButtons({ pageCount, currentPage }) {
+function LinkPageButtons({ pageCount, currentPage, params = 'game-list' }) {
 
 
     return (
@@ -15,7 +15,7 @@ function LinkPageButtons({ pageCount, currentPage }) {
             shape="rounded"
             page={currentPage}
             renderItem={item => (
-                <PaginationItem component={Link} to={`/game-list/${item.page}`} {...item} />
+                <PaginationItem component={Link} to={`/${params}/${item.page}`} {...item} />
             )}
             />
         </Stack>

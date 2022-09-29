@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get "/me", to: "users#show"
 
+  get "/me/:list", to: "users#list"
+
   get "/users", to: "users#index"
 
   post "/login", to: "sessions#create"
