@@ -21,7 +21,7 @@ services:
         value: enabled
       - key: DATABASE_URL # Render PostgreSQL database
         fromDatabase:
-          name: postgresql-acute-68754
+          name: Gamer Spot database
           property: connectionString
 
 databases: # Render PostgreSQL database
