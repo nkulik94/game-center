@@ -25,5 +25,5 @@ services:
           property: connectionString
 
 databases: # Render PostgreSQL database
-  - name: postgresql-acute-68754
+  - name: Gamer Spot database
     ipAllowList: [] # only allow internal connections
