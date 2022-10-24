@@ -25,7 +25,7 @@ function App() {
                 <Route exact path="/">
                     <Home />
                 </Route>
-                <Route exact path="/game-list/:page">
+                <Route exact path="/game-list">
                     <GamePage />
                 </Route>
                 <Route path="/user-list">
