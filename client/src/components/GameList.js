@@ -5,7 +5,7 @@ import GameCard from "./GameCard";
 import SimplePageButtons from "./SimplePageButtons";
 import SearchBar from "./SearchBar";
 import PageButtons from "./PageButtons";
-import AdvancedSearch from "./AdvancedSearch";
+//import AdvancedSearch from "./AdvancedSearch";
 
 function GameList({ games, isMainList = true, searched, setSearched, page, totalPages, setPage }) {
     const [pageCount, setPageCount] = useState(0)
@@ -30,7 +30,7 @@ function GameList({ games, isMainList = true, searched, setSearched, page, total
     const pageBtns = isMainList ? <PageButtons count={totalPages} setPage={setPage} page={page} /> : <SimplePageButtons setList={setList} listItems={games} count={pageCount} />
     return (
         <Paper sx={{textAlign: 'center', color: '#e0e0e0'}}>
-            {isMainList ? <AdvancedSearch /> : <SearchBar searched={searched} setSearched={setSearched} />}
+            {isMainList ? null : <SearchBar searched={searched} setSearched={setSearched} />}
             <Grid sx={{width: 'fit-content', margin: 'auto'}} container spacing={2} >
                 {listedGames.map(game => {
                         return (
