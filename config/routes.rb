@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   patch "users/:id", to: "users#update"
 
   delete "users/:id", to: "users#destroy"
+
+  post "/filters", to: "filters#create"
+
+  delete "/filters/:filter", to: "filters#destroy"
   
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
