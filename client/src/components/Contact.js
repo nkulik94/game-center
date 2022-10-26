@@ -32,7 +32,7 @@ function Contact() {
                         <br/>
                         <Typography variant="title">Github: <Link href='https://github.com/nkulik94'>https://github.com/nkulik94</Link></Typography>
                         <br/>
-                        <Typography variant="title">Blog: <Link href="https://dev.to/nkulik94">https://dev.to/nkulik94</Link></Typography>
+                        <Typography variant="title">Blog: <Link href="https://medium.com/@nkulik">https://medium.com/@nkulik</Link></Typography>
                     </CardContent>
                 </Card>
             </Paper>
