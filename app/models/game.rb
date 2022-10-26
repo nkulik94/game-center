@@ -18,9 +18,18 @@ class Game < ApplicationRecord
         end
     end
 
-    def self.page_count
-        pages = Game.count / 18
-        pages += 1 unless pages * 18 == Game.count
+    def self.apply_filters filters
+        Game.where(filters)
+    end
+
+    # def self.game_page
+
+    # end
+
+    def self.page_count filters = {}
+        game_count = Game.where(filters).count
+        pages = game_count / 18
+        pages += 1 unless pages * 18 == game_count
         pages
     end
 
