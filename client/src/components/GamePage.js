@@ -1,12 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { GamesContext } from "../context/games";
 import GameList from "./GameList";
 import Container from '@mui/material/Container';
 
 function GamePage() {
     const gameContext = useContext(GamesContext)
-    const [searched, setSearched] = useState('')
     const [pageCount, setPageCount] = useState(0)
     const [page, setPage] = useState(null)
     const [activePage, setActive] = useState(1)
@@ -21,13 +19,10 @@ function GamePage() {
                 setActive(active_page)
             })
     }, [page])
-    
-
-    //const filteredGames = games.filter(game => game.title.toUpperCase().includes(searched.toUpperCase()))
 
     return (
         <Container sx={{marginTop: '3%'}}>
-            <GameList games={gameContext.games} searched={searched} setSearched={setSearched} totalPages={pageCount} setPage={setPage} page={activePage} />
+            <GameList games={gameContext.games} totalPages={pageCount} setPage={setPage} page={activePage} />
         </Container>
     )
 }
