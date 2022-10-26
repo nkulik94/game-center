@@ -4,9 +4,10 @@ class GamesController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
     def index
-        offset = (params[:page] ? params[:page].to_i - 1 : 0) * 18
+        session[:page] = params[:page] ? params[:page].to_i - 1 : (session[:page] || 0)
+        offset = session[:page] * 18
         game_page = Game.serialize_group(Game.offset(offset).limit(18))
-        render json: { page_count: Game.page_count, games: game_page }
+        render json: { page_count: Game.page_count(session[:main_list_filters]), active_page: session[:page] + 1, games: game_page }
     end
 
     def show

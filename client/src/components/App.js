@@ -25,7 +25,7 @@ function App() {
                 <Route exact path="/">
                     <Home />
                 </Route>
-                <Route exact path="/game-list/:page">
+                <Route exact path="/game-list">
                     <GamePage />
                 </Route>
                 <Route path="/user-list">
@@ -37,7 +37,7 @@ function App() {
                 <Route path='/game-details/:gameId'>
                     <DetailedGame />
                 </Route>
-                <Route path="/profile/:list/:page">
+                <Route path="/profile">
                     <ProfilePage />
                 </Route>
                 <Route path="/sign-in">
