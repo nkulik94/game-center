@@ -5,8 +5,7 @@ class GamesController < ApplicationController
 
     def index
         session[:page] = params[:page] ? params[:page].to_i - 1 : (session[:page] || 0)
-        offset = session[:page] * 18
-        game_page = Game.serialize_group(Game.offset(offset).limit(18))
+        game_page = Game.create_page(session[:page])
         render json: { page_count: Game.page_count(session[:main_list_filters]), active_page: session[:page] + 1, games: game_page }
     end
 
