@@ -18,6 +18,12 @@ class Game < ApplicationRecord
         end
     end
 
+    def self.create_page page
+        offset = page * 18
+        game_page = Game.serialize_group(Game.offset(offset).limit(18))
+        game_page
+    end
+
     def self.apply_filters filters
         Game.where(filters)
     end
